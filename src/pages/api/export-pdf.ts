@@ -30,7 +30,7 @@ export default async function handler(
     if (request.gcpFile) {
       const { bucketName, filePath } = request.gcpFile;
       const fileContent = await GcpStorageService.readTextFile(bucketName, filePath);
-      
+
       markdown = fileContent; // Fix: assign to markdown variable
     } else if (request.sourceFilePath) {
       // Handle local file path
@@ -45,9 +45,9 @@ export default async function handler(
         });
       }
     } else {
-      return res.status(400).json({ 
-        message: "Bad request", 
-        error: "Either gcpFile, or sourceFilePath must be provided" 
+      return res.status(400).json({
+        message: "Bad request",
+        error: "Either gcpFile, or sourceFilePath must be provided"
       });
     }
 
@@ -64,7 +64,7 @@ export default async function handler(
     } else {
       outputDir = path.join(process.cwd(), "public", "exports");
       const timestamp = new Date().getTime();
-      const userSlug = request.userName ? 
+      const userSlug = request.userName ?
         `${request.userName.replace(/\s+/g, '-').toLowerCase()}-` : '';
       filename = `${userSlug}document-${timestamp}.pdf`;
       filePath = path.join(outputDir, filename);
@@ -81,9 +81,9 @@ export default async function handler(
 
     await renderToFile(
       // @ts-ignore
-      React.createElement(MarkdownReportPDF, { 
+      React.createElement(MarkdownReportPDF, {
         markdown,
-        theme: request.theme || 'default',
+        theme: request.theme || 'astrology',
         documentName: request.documentName,
         userName: request.userName,
         birthDate: request.birthDate,
@@ -95,8 +95,8 @@ export default async function handler(
 
     // Return public URL if inside public directory, otherwise just the path
     const isInPublic = filePath.includes(path.join(process.cwd(), "public"));
-    const returnPath = isInPublic ? 
-      filePath.split('public')[1] : 
+    const returnPath = isInPublic ?
+      filePath.split('public')[1] :
       filePath;
 
     const response: ResponseData = {
@@ -108,10 +108,10 @@ export default async function handler(
     if (request.outputStorageFilePath) {
       try {
         const { bucketName, filePath: storagePath } = request.outputStorageFilePath;
-        
+
         // Read the generated PDF file
         const pdfBuffer = await fs.readFile(filePath);
-        
+
         // Upload to GCP
         await GcpStorageService.uploadFile(
           bucketName,
@@ -119,7 +119,7 @@ export default async function handler(
           pdfBuffer,
           { contentType: 'application/pdf' }
         );
-        
+
         response.gcpStoragePath = `gs://${bucketName}/${storagePath}`;
       } catch (gcpError) {
         console.error("Error uploading to GCP:", gcpError);
