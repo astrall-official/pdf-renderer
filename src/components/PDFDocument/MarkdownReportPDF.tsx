@@ -1,23 +1,23 @@
+// @ts-nocheck
 import React from "react";
 // @ts-ignore
 import Markdown from "react-markdown";
-import { Document, Page, View, Text } from "@react-pdf/renderer";
+import { Document, Page, View, Text, Image } from "@react-pdf/renderer";
 import { getTheme } from "../../styles/pdfThemes";
 // @ts-ignore
 import remarkGfm from "remark-gfm";
 import { default as Logo } from "./assets/general/logo";
 import { getThemeComponents } from "./themes/themeComponents";
 import { text } from "stream/consumers";
+import { transform } from "next/dist/build/swc/generated-native";
 
-// Simple placeholder SVG icon component
-const PlaceholderIcon = () => <Logo width={120} height={120} fill="white" />;
 
 /**
  * Component to render a markdown string as PDF
  * @param {Object} props - Component props
  * @param {string} props.markdown - Markdown content to render
  * @param {string} [props.theme='default'] - Theme name to apply ('default', 'dark', 'professional', or 'astrology')
- * @param {string} [props.reportName=''] - Name of the report
+ * @param {string} [props.documentName=''] - Name of the report
  * @param {string} [props.userName=''] - Name of the user
  * @param {string} [props.location=''] - Birth location
  * @param {string} [props.birthDate=''] - Birth date
@@ -26,12 +26,12 @@ const PlaceholderIcon = () => <Logo width={120} height={120} fill="white" />;
 const MarkdownReportPDF = ({
   markdown,
   theme = "astrology",
-  reportName = "Interpretación Consultas Astrológicas",
+  documentName = "Interpretación Consultas Astrológicas",
   userName = "Ximena Vallejos",
   location = "Villarrica, Chile",
   birthDate = "1985-03-04",
   birthTime = "14:40"
-}: { markdown: string; theme?: string; reportName?: string; userName?: string; location?: string; birthDate?: string; birthTime?: string; }) => {
+}: { markdown: string; theme?: string; documentName?: string; userName?: string; location?: string; birthDate?: string; birthTime?: string; }) => {
   const styles = getTheme(theme);
   const components = getThemeComponents(theme, styles);
 
@@ -39,9 +39,9 @@ const MarkdownReportPDF = ({
     page: { ...styles.page, backgroundColor: "#444444", color: "white", position: "relative" },
     icon: {
       position: "absolute",
-      zIndex: 999999,
-      top: 40,
-      right: 40
+      top: 0,
+      left: "50%",
+      transform: "translateX(-30%)",
     },
     mainContent: {
       display: "flex",
@@ -57,7 +57,6 @@ const MarkdownReportPDF = ({
     <Document>
       <Page size="A4" style={coverPageStyles.page}>
         <View
-          debug
           style={{
             position: "absolute",
             top: 0,
@@ -66,19 +65,35 @@ const MarkdownReportPDF = ({
             width: 40,
             backgroundColor: "#777777"
           }}
-        ></View>
-        <View style={coverPageStyles.icon}>
-          <PlaceholderIcon />
-        </View>
-
-        <View debug style={coverPageStyles.mainContent}>
-        <Text style={styles.h3}>{reportName}</Text>
-          <Text style={styles.h1}>{userName}</Text>
+        />
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: 40,
+            backgroundColor: "#777777"
+          }}
+        />
+        <View style={coverPageStyles.mainContent}>
+            <View style={coverPageStyles.icon}>
+              <Logo width={60} height={60} fill="white" />
+            </View>
+            <Text style={{...styles.h1, fontSize: 24, fontWeight: 200, maxWidth: 350}}>{documentName}</Text>
+            <Image src={"https://raw.githubusercontent.com/astrall-official/pdf-renderer/refs/heads/main/src/assets/img/astrology-wheel.jpg"} style={{ width: 400, height: 400, marginVertical: 20 }} />  
+            <Text style={styles.h1}>{userName}</Text>
             <Text style={{...styles.h4, marginTop: 5 }}>{location}</Text>
             <Text style={{...styles.h4, marginTop: 5}}>{birthDate} {birthTime || ''}</Text>
         </View>
       </Page>
       <Page size="A4" style={styles.page}>
+      <Text render={({ pageNumber, totalPages }) => {
+        if (pageNumber <= 2) {
+          return "";
+        }
+        return pageNumber - 2
+      }} fixed style={{right: 30, bottom: 30, position: "absolute"}} />
         <Markdown
           key={markdown.length + theme}
           remarkPlugins={[remarkGfm]}

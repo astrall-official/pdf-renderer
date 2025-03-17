@@ -22,6 +22,7 @@ export const astrologyTheme = (styles) => {
     h1: ({ children }) => (
       <View
         break
+        wrap={false}
         style={{
           display: "flex",
           flexDirection: "column",
@@ -101,108 +102,37 @@ export const astrologyTheme = (styles) => {
     ),
     h2: ({ children }) => (
       <View
-            minPresenceAhead={1}
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              alignContent: "center"
-            }}
-          >
-            <Text break style={{ ...styles.h2, marginBottom: 20 }}>
-              {children}
-            </Text>
-            <View style={{ marginLeft: 20, marginRight: -30 }}>
-              <EightPointedStar width={20} height={20} fill="#000" />
-            </View>
-            <View
-              style={{
-                flex: 1,
-                marginRight: 30,
-                marginLeft: 20
-              }}
-            >
-              <Line3 height={1} />
-            </View>
-          </View>
+        minPresenceAhead={80}
+        wrap={false}
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          alignContent: "center"
+        }}
+      >
+        <Text break style={{ ...styles.h2, marginBottom: 20 }}>
+          {children}
+        </Text>
+        <View style={{ marginLeft: 20, marginRight: -30 }}>
+          <EightPointedStar width={20} height={20} fill="#000" />
+        </View>
+        <View
+          style={{
+            flex: 1,
+            marginRight: 30,
+            marginLeft: 20
+          }}
+          minPresenceAhead={80}
+        >
+          <Line3 height={1} />
+        </View>
+      </View>
     ),
     h3: ({ children }) => (
       <View
-            minPresenceAhead={1}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              alignContent: "center",
-              marginVertical: 10
-            }}
-          >
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center"
-              }}
-            >
-              <EightPointedStar width={10} height={10} fill="#000" />
-              <Moon rtl width={8} height={13} fill="#000" />
-              <View>
-                <Text
-                  style={{
-                    ...styles.h3,
-                    marginLeft: 10,
-                    marginRight: 10,
-                    marginBottom: 15
-                  }}
-                >
-                  {children}
-                </Text>
-              </View>
-              <Moon width={8} height={13} fill="#000" />
-              <EightPointedStar width={10} height={10} fill="#000" />
-            </View>
-            <Line1 width={400} />
-          </View>
-    ),
-    h4: ({ children }) => (
-      <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center"
-            }}
-            minPresenceAhead={1}
-          >
-            <EightPointedStar width={10} height={10} fill="#000" />
-            <View>
-              <Text
-                style={{
-                  ...styles.h4,
-                  marginLeft: 10,
-                  marginRight: 10,
-                  marginBottom: 10
-                }}
-              >
-                {children}
-              </Text>
-            </View>
-            <EightPointedStar width={10} height={10} fill="#000" />
-          </View>
-    ),
-    blockquote: ({ children }) => (
-      <View
-        style={{
-          ...styles.blockquote,
-          borderLeft: "3 solid #555",
-          backgroundColor: "#f5f5f5"
-        }}
-      >
-        {children}
-      </View>
-    ),
-    strongTitle: ({ children, index }) => (
-      <View
-        minPresenceAhead={1}
+        minPresenceAhead={80}
+        wrap={false}
         style={{
           display: "flex",
           flexDirection: "column",
@@ -210,7 +140,6 @@ export const astrologyTheme = (styles) => {
           alignContent: "center",
           marginVertical: 10
         }}
-        debug
       >
         <View
           style={{
@@ -236,9 +165,126 @@ export const astrologyTheme = (styles) => {
           <Moon width={8} height={13} fill="#000" />
           <EightPointedStar width={10} height={10} fill="#000" />
         </View>
-        <Line1 width={400} />
       </View>
-    )
+    ),
+    h4: ({ children }) => (
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center"
+        }}
+        minPresenceAhead={80}
+        wrap={false}
+      >
+        <EightPointedStar width={10} height={10} fill="#000" />
+        <View>
+          <Text
+            style={{
+              ...styles.h4,
+              marginLeft: 10,
+              marginRight: 10,
+              marginBottom: 10
+            }}
+          >
+            {children}
+          </Text>
+        </View>
+        <EightPointedStar width={10} height={10} fill="#000" />
+      </View>
+    ),
+    blockquote: ({ children }) => (
+      <View
+        style={{
+          ...styles.blockquote,
+          borderLeft: "3 solid #555",
+          backgroundColor: "#f5f5f5"
+        }}
+      >
+        {children}
+      </View>
+    ),
+    strongTitle: ({ children, index }) => (
+      <View
+        minPresenceAhead={80}
+        wrap={false}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          alignContent: "center",
+          marginVertical: 10
+        }}
+      >
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center"
+          }}
+        >
+          <EightPointedStar width={10} height={10} fill="#000" />
+          <Moon rtl width={8} height={13} fill="#000" />
+          <View>
+            <Text
+              style={{
+                ...styles.h3,
+                marginLeft: 10,
+                marginRight: 10,
+                marginBottom: 15
+              }}
+            >
+              {children}
+            </Text>
+          </View>
+          <Moon width={8} height={13} fill="#000" />
+          <EightPointedStar width={10} height={10} fill="#000" />
+        </View>
+      </View>
+    ),
+    tagList: ({ children, title, elements }) => (
+      <View
+        wrap={false}
+        minPresenceAhead={80}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          flexWrap: "wrap",
+          alignItems: "center",
+          alignContent: "center"
+        }}
+      >
+        {title && <Text
+          style={{
+            ...styles.h4,
+          }}
+        >
+          {title}
+        </Text>}
+        <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", marginTop: 5, marginBottom: 20 }}>
+          {elements.map((element, idx) => (
+            <View
+              key={idx}
+              style={{
+                marginBottom: 10,
+                marginHorizontal: 10,
+              }}
+            >
+              <Text
+                style={{
+                  backgroundColor: "#444",
+                  borderRadius: 50,
+                  color: "#fff",
+                  padding: "5 10"
+                }}
+              >
+                {element}
+              </Text>
+            </View>
+          ))}
+        </View>
+      </View>
+    ),
   };
 
   return createThemeComponents(styles, themeOverrides);
@@ -350,7 +396,6 @@ export const getThemeComponents = (themeName, styles) => {
     console.warn(`Theme "${themeName}" not found. Using default theme.`);
     return defaultTheme(styles);
   }
-  console.warn(`Theme "${themeName}" was found.`);
   return themeRegistry[themeName](styles);
 };
 

@@ -1,12 +1,14 @@
 {
   "name": "pdf",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev -p 3001",
     "build": "next build",
     "start": "next start -p 3001",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-pdf": "NODE_OPTIONS='--experimental-specifier-resolution=node' ts-node --esm src/cli/generate-pdf.ts"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.15.2",
@@ -14,6 +16,7 @@
     "@types/fs-extra": "^11.0.4",
     "fs-extra": "^11.3.0",
     "next": "15.2.2",
+    "node-fetch": "^3.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0",

@@ -1,19 +1,24 @@
 import { StyleSheet, Font } from "@react-pdf/renderer";
 
+Font.registerHyphenationCallback(word => {
+  // Return entire word as unique part
+  return [word];
+});
+
 // Register font
 Font.register({
   family: "Aboreto",
   fonts: [
-    {src: "https://fonts.gstatic.com/s/aboreto/v2/5DCXAKLhwDDQ4N8bpK3UAk6t1Sd3PA.woff2"},
-    {src: "https://fonts.gstatic.com/s/aboreto/v2/5DCXAKLhwDDQ4N8bpK3UAk6t1Sd3PA.woff2", fontStyle: "italic"},
+    { src: "https://fonts.gstatic.com/s/aboreto/v2/5DCXAKLhwDDQ4N8bpK3UAk6t1Sd3PA.woff2" },
+    { src: "https://fonts.gstatic.com/s/aboreto/v2/5DCXAKLhwDDQ4N8bpK3UAk6t1Sd3PA.woff2", fontStyle: "italic" },
   ]
 });
 
 Font.register({
   family: "Poiret One",
   fonts: [
-    {src: "http://fonts.gstatic.com/s/poiretone/v4/HrI4ZJpJ3Fh0wa5ofYMK8S3USBnSvpkopQaUR-2r7iU.ttf"},
-    {src: "http://fonts.gstatic.com/s/poiretone/v4/HrI4ZJpJ3Fh0wa5ofYMK8S3USBnSvpkopQaUR-2r7iU.ttf", fontStyle: "italic"},
+    { src: "http://fonts.gstatic.com/s/poiretone/v4/HrI4ZJpJ3Fh0wa5ofYMK8S3USBnSvpkopQaUR-2r7iU.ttf" },
+    { src: "http://fonts.gstatic.com/s/poiretone/v4/HrI4ZJpJ3Fh0wa5ofYMK8S3USBnSvpkopQaUR-2r7iU.ttf", fontStyle: "italic" },
   ]
 });
 
@@ -22,10 +27,10 @@ Font.register({
   fonts: [
     { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-Thin.ttf", fontWeight: 100 },
     { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-ThinItalic.ttf", fontWeight: 100, fontStyle: "italic" },
-    
+
     { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-ExtraLight.ttf", fontWeight: 200 },
     { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-ExtraLightItalic.ttf", fontWeight: 200, fontStyle: "italic" },
-    
+
     { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-Light.ttf", fontWeight: 300 },
     { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-LightItalic.ttf", fontWeight: 300, fontStyle: "italic" },
 
@@ -68,24 +73,28 @@ const baseStyles = {
     marginBottom: 10,
     marginTop: 20,
     textTransform: "uppercase",
+    maxWidth: 350
   },
   h2: {
     fontSize: 16,
     fontWeight: 400,
     marginBottom: 8,
-    marginTop: 16
+    marginTop: 16,
+    maxWidth: 350
   },
   h3: {
     fontSize: 14,
     fontWeight: 400,
     marginBottom: 6,
-    marginTop: 14
+    marginTop: 14,
+    maxWidth: 350
   },
   h4: {
     fontSize: 12,
     fontWeight: 500,
     marginBottom: 4,
-    marginTop: 12
+    marginTop: 12,
+    maxWidth: 350
   },
   h5: {
     fontSize: 10,

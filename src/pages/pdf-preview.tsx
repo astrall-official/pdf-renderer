@@ -7,7 +7,7 @@ import styles from "../styles/PdfPreview.module.css";
 const PdfPreviewPage = () => {
   const [markdown, setMarkdown] = useState(exampleMarkdown);
   const [theme, setTheme] = useState("astrology");
-  const [reportName, setReportName] = useState("PDF Preview Report");
+  const [documentName, setdocumentName] = useState("Interpretación Consultas Astrológicas");
   const [userName, setUserName] = useState("John Doe");
   const [viewerHeight, setViewerHeight] = useState("100%");
 
@@ -37,8 +37,8 @@ const PdfPreviewPage = () => {
             <input
               className={styles.input}
               type="text"
-              value={reportName}
-              onChange={(e) => setReportName(e.target.value)}
+              value={documentName}
+              onChange={(e) => setdocumentName(e.target.value)}
             />
           </div>
           
@@ -70,7 +70,7 @@ const PdfPreviewPage = () => {
           key={markdown.length + theme}
           markdown={markdown}
           theme={theme}
-          reportName={reportName}
+          documentName={documentName}
           userName={userName}
           location="Sample Location"
           birthDate="2000-01-01"

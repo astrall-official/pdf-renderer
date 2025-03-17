@@ -12,7 +12,7 @@ const PDFViewer = dynamic( () => import( "@react-pdf/renderer" ).then((mod) => m
 interface PDFPreviewRendererProps {
   markdown: string;
   theme: string;
-  reportName: string;
+  documentName: string;
   userName: string;
   location?: string;
   birthDate?: string;
@@ -23,7 +23,7 @@ interface PDFPreviewRendererProps {
 const PDFPreviewRenderer: React.FC<PDFPreviewRendererProps> = ({
   markdown,
   theme,
-  reportName,
+  documentName,
   userName,
   location = 'Sample Location',
   birthDate = '2000-01-01',
@@ -46,7 +46,7 @@ const PDFPreviewRenderer: React.FC<PDFPreviewRendererProps> = ({
     <MarkdownReportPDF
       markdown={markdown}
       theme={theme}
-      reportName={reportName}
+      documentName={documentName}
       userName={userName}
       location={location}
       birthDate={birthDate}

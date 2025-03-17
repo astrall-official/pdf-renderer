@@ -18,7 +18,7 @@ export default async function handler(
   }
 
   try {
-    const { markdown, theme = "default", reportName = "Preview", userName = "User" } = req.body;
+    const { markdown, theme = "default", documentName = "Preview", userName = "User" } = req.body;
 
     if (!markdown) {
       return res.status(400).json({ 
@@ -32,7 +32,7 @@ export default async function handler(
       React.createElement(MarkdownReportPDF, { 
         markdown, 
         theme, 
-        reportName,
+        documentName,
         userName,
         location: "Sample Location",
         birthDate: "2000-01-01",

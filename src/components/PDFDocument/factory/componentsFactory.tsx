@@ -10,7 +10,7 @@ import { renderTextWithStyles } from "../helpers/renderHelper";
 export const createBaseComponents = (styles) => {
   return {
     // Text elements
-    p: ({ node }) => renderTextWithStyles(node, {}, styles),
+    // p: ({ node }) => renderTextWithStyles(node, {}, styles),
     h1: ({ children }) => (
       <Text break style={styles.h1}>
         {children}
@@ -41,7 +41,7 @@ export const createBaseComponents = (styles) => {
         {children}
       </Text>
     ),
-    
+
     // Inline elements
     strong: ({ children }) => <Text style={styles.strong}>{children}</Text>,
     em: ({ children }) => <Text style={styles.em}>{children}</Text>,
@@ -51,7 +51,7 @@ export const createBaseComponents = (styles) => {
       </Link>
     ),
     code: ({ children }) => <Text style={styles.code}>{children}</Text>,
-    
+
     // Block elements
     hr: () => <View style={styles.hr}></View>,
     ol: ({ children }) => <View style={styles.list}>{children}</View>,
@@ -62,7 +62,7 @@ export const createBaseComponents = (styles) => {
     ),
     pre: ({ children }) => <View style={styles.codeBlock}>{children}</View>,
     div: ({ children }) => <View>{children}</View>,
-    
+
     // Default handler for strongTitle (can be overridden by themes)
     strongTitle: ({ children }) => (
       <Text style={styles.strong}>{children}</Text>
@@ -78,7 +78,7 @@ export const createBaseComponents = (styles) => {
  */
 export const createThemeComponents = (styles, themeOverrides = {}) => {
   const baseComponents = createBaseComponents(styles);
-  
+
   // Create a modified p component that uses all theme overrides
   const modifiedBaseComponents = {
     ...baseComponents,

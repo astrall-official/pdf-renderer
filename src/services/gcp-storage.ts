@@ -3,6 +3,11 @@ import fs from 'fs-extra';
 import path from 'path';
 import os from 'os';
 
+interface UploadOptions {
+  contentType?: string;
+  metadata?: Record<string, string>;
+}
+
 // Initialize storage client
 const storage = new Storage();
 
@@ -59,6 +64,34 @@ export class GcpStorageService {
     } catch (error) {
       console.error('Error downloading file from GCP Storage:', error);
       throw new Error(`Failed to download file: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  }
+
+  /**
+   * Upload a file to GCP Storage
+   */
+  static async uploadFile(
+    bucketName: string, 
+    filePath: string, 
+    content: Buffer | string,
+    options?: UploadOptions
+  ): Promise<void> {
+    try {
+      const bucket = storage.bucket(bucketName);
+      const file = bucket.file(filePath);
+      
+      const uploadOptions: any = {};
+      if (options?.contentType) {
+        uploadOptions.contentType = options.contentType;
+      }
+      if (options?.metadata) {
+        uploadOptions.metadata = options.metadata;
+      }
+      
+      await file.save(content, uploadOptions);
+    } catch (error) {
+      console.error('Error uploading file to GCP Storage:', error);
+      throw new Error(`Failed to upload file to GCP Storage: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 }
