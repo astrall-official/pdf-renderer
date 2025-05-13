@@ -7,64 +7,64 @@ import { renderTextWithStyles } from "../helpers/renderHelper";
  * @param {Object} styles - The styles object
  * @returns {Object} Base components
  */
-export const createBaseComponents = (styles) => {
+export const createBaseComponents = (styles: any) => {
   return {
     // Text elements
     // p: ({ node }) => renderTextWithStyles(node, {}, styles),
-    h1: ({ children }) => (
+    h1: ({ children }: { children: React.ReactNode }) => (
       <Text break style={styles.h1}>
         {children}
       </Text>
     ),
-    h2: ({ children }) => (
+    h2: ({ children }: { children: React.ReactNode }) => (
       <Text minPresenceAhead={1} style={styles.h2}>
         {children}
       </Text>
     ),
-    h3: ({ children }) => (
+    h3: ({ children }: { children: React.ReactNode }) => (
       <Text minPresenceAhead={1} style={styles.h3}>
         {children}
       </Text>
     ),
-    h4: ({ children }) => (
+    h4: ({ children }: { children: React.ReactNode }) => (
       <Text minPresenceAhead={1} style={styles.h4}>
         {children}
       </Text>
     ),
-    h5: ({ children }) => (
+    h5: ({ children }: { children: React.ReactNode }) => (
       <Text minPresenceAhead={1} style={styles.h5}>
         {children}
       </Text>
     ),
-    h6: ({ children }) => (
+    h6: ({ children }: { children: React.ReactNode }) => (
       <Text minPresenceAhead={1} style={styles.h6}>
         {children}
       </Text>
     ),
 
     // Inline elements
-    strong: ({ children }) => <Text style={styles.strong}>{children}</Text>,
-    em: ({ children }) => <Text style={styles.em}>{children}</Text>,
-    a: ({ children, href }) => (
+    strong: ({ children }: { children: React.ReactNode }) => <Text style={styles.strong}>{children}</Text>,
+    em: ({ children }: { children: React.ReactNode }) => <Text style={styles.em}>{children}</Text>,
+    a: ({ children, href }: { children: React.ReactNode, href: string }) => (
       <Link style={styles.link} src={href}>
         {children}
       </Link>
     ),
-    code: ({ children }) => <Text style={styles.code}>{children}</Text>,
+    code: ({ children }: { children: React.ReactNode }) => <Text style={styles.code}>{children}</Text>,
 
     // Block elements
     hr: () => <View style={styles.hr}></View>,
-    ol: ({ children }) => <View style={styles.list}>{children}</View>,
-    ul: ({ children }) => <View style={styles.list}>{children}</View>,
-    li: ({ children }) => <Text style={styles.listItem}>• {children}</Text>,
-    blockquote: ({ children }) => (
+    ol: ({ children }: { children: React.ReactNode }) => <View style={styles.list}>{children}</View>,
+    ul: ({ children }: { children: React.ReactNode }) => <View style={styles.list}>{children}</View>,
+    li: ({ children }: { children: React.ReactNode }) => <Text style={styles.listItem}>• {children}</Text>,
+    blockquote: ({ children }: { children: React.ReactNode }) => (
       <View style={styles.blockquote}>{children}</View>
     ),
-    pre: ({ children }) => <View style={styles.codeBlock}>{children}</View>,
-    div: ({ children }) => <View>{children}</View>,
+    pre: ({ children }: { children: React.ReactNode }) => <View style={styles.codeBlock}>{children}</View>,
+    div: ({ children }: { children: React.ReactNode }) => <View>{children}</View>,
 
     // Default handler for strongTitle (can be overridden by themes)
-    strongTitle: ({ children }) => (
+    strongTitle: ({ children }: { children: React.ReactNode }) => (
       <Text style={styles.strong}>{children}</Text>
     )
   };
@@ -76,13 +76,14 @@ export const createBaseComponents = (styles) => {
  * @param {Object} themeOverrides - Theme-specific component overrides
  * @returns {Object} Theme components
  */
-export const createThemeComponents = (styles, themeOverrides = {}) => {
+export const createThemeComponents = (styles: any, themeOverrides = {}) => {
   const baseComponents = createBaseComponents(styles);
 
   // Create a modified p component that uses all theme overrides
   const modifiedBaseComponents = {
     ...baseComponents,
-    p: ({ node }) => renderTextWithStyles(node, { ...themeOverrides }, styles)
+    p: ({ node }: { node: any }) => renderTextWithStyles(node, { ...themeOverrides }, styles)
+    // p: ({ node, children }: { node: any, children: React.ReactNode }) => <Text>{children}</Text>,
   };
 
   // Merge base components with theme overrides

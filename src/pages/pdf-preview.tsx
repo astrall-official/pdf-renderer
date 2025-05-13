@@ -7,8 +7,8 @@ import styles from "../styles/PdfPreview.module.css";
 const PdfPreviewPage = () => {
   const [markdown, setMarkdown] = useState(exampleMarkdown);
   const [theme, setTheme] = useState("astrology");
-  const [documentName, setdocumentName] = useState("Interpretación Consultas Astrológicas");
-  const [userName, setUserName] = useState("John Doe");
+  const [documentName, setdocumentName] = useState("3 PREGUNTAS A LAS ESTRELLAS");
+  const [userName, setUserName] = useState("Marta Alarcón");
   const [viewerHeight, setViewerHeight] = useState("100%");
 
   return (
@@ -16,13 +16,13 @@ const PdfPreviewPage = () => {
       {/* Left Column - Controls */}
       <div className={styles.leftColumn}>
         <h1 className={styles.title}>PDF Markdown Preview</h1>
-        
+
         <div className={styles.controls}>
           <div className={styles.controlGroup}>
             <label className={styles.label}>Theme:</label>
-            <select 
+            <select
               className={styles.select}
-              value={theme} 
+              value={theme}
               onChange={(e) => setTheme(e.target.value)}
             >
               <option value="default">Default</option>
@@ -31,7 +31,7 @@ const PdfPreviewPage = () => {
               <option value="professional">Professional</option>
             </select>
           </div>
-          
+
           <div className={styles.controlGroup}>
             <label className={styles.label}>Report Name:</label>
             <input
@@ -41,7 +41,7 @@ const PdfPreviewPage = () => {
               onChange={(e) => setdocumentName(e.target.value)}
             />
           </div>
-          
+
           <div className={styles.controlGroup}>
             <label className={styles.label}>User Name:</label>
             <input
@@ -52,7 +52,7 @@ const PdfPreviewPage = () => {
             />
           </div>
         </div>
-        
+
         <div className={styles.markdownEditor}>
           <h3 className={styles.subtitle}>Markdown Editor</h3>
           <textarea
@@ -63,7 +63,7 @@ const PdfPreviewPage = () => {
           />
         </div>
       </div>
-      
+
       {/* Right Column - PDF Preview */}
       <div className={styles.rightColumn}>
         <PDFPreviewRenderer
@@ -72,9 +72,9 @@ const PdfPreviewPage = () => {
           theme={theme}
           documentName={documentName}
           userName={userName}
-          location="Sample Location"
-          birthDate="2000-01-01"
-          birthTime="12:00"
+          location="Linares, Chile"
+          birthDate="1981-04-04"
+          birthTime="23:33"
           viewerHeight={viewerHeight}
         />
       </div>

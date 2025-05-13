@@ -26,6 +26,9 @@ export default async function handler(
     const request: ExportPdfRequest = req.body;
     let markdown: string;
 
+    // Add debug message
+    console.log("Received request:", request);
+
     // Determine the content source and load it
     if (request.gcpFile) {
       const { bucketName, filePath } = request.gcpFile;

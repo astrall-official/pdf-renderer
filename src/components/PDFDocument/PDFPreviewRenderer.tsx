@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react';
 //import { PDFViewer } from '@react-pdf/renderer';
 import MarkdownReportPDF from './MarkdownReportPDF';
 
-const PDFViewer = dynamic( () => import( "@react-pdf/renderer" ).then((mod) => mod.PDFViewer), {
-    loading: () => "loading PDF preview...",
-    ssr: false
-  } );
+const PDFViewer = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFViewer), {
+  loading: () => "loading PDF preview...",
+  ssr: false
+});
 
 interface PDFPreviewRendererProps {
   markdown: string;

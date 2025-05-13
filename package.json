@@ -7,8 +7,7 @@
     "dev": "NODE_OPTIONS='--inspect' next dev -p 3001",
     "build": "next build",
     "start": "next start -p 3001",
-    "lint": "next lint",
-    "generate-pdf": "NODE_OPTIONS='--experimental-specifier-resolution=node' ts-node --esm src/cli/generate-pdf.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.15.2",

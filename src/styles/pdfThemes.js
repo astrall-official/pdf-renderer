@@ -6,51 +6,51 @@ Font.registerHyphenationCallback(word => {
 });
 
 // Register font
-Font.register({
-  family: "Aboreto",
-  fonts: [
-    { src: "https://fonts.gstatic.com/s/aboreto/v2/5DCXAKLhwDDQ4N8bpK3UAk6t1Sd3PA.woff2" },
-    { src: "https://fonts.gstatic.com/s/aboreto/v2/5DCXAKLhwDDQ4N8bpK3UAk6t1Sd3PA.woff2", fontStyle: "italic" },
-  ]
-});
+// Font.register({
+//   family: "Aboreto",
+//   fonts: [
+//     { src: "https://fonts.gstatic.com/s/aboreto/v2/5DCXAKLhwDDQ4N8bpK3UAk6t1Sd3PA.woff2" },
+//     { src: "https://fonts.gstatic.com/s/aboreto/v2/5DCXAKLhwDDQ4N8bpK3UAk6t1Sd3PA.woff2", fontStyle: "italic" },
+//   ]
+// });
 
-Font.register({
-  family: "Poiret One",
-  fonts: [
-    { src: "http://fonts.gstatic.com/s/poiretone/v4/HrI4ZJpJ3Fh0wa5ofYMK8S3USBnSvpkopQaUR-2r7iU.ttf" },
-    { src: "http://fonts.gstatic.com/s/poiretone/v4/HrI4ZJpJ3Fh0wa5ofYMK8S3USBnSvpkopQaUR-2r7iU.ttf", fontStyle: "italic" },
-  ]
-});
+// Font.register({
+//   family: "Poiret One",
+//   fonts: [
+//     { src: "http://fonts.gstatic.com/s/poiretone/v4/HrI4ZJpJ3Fh0wa5ofYMK8S3USBnSvpkopQaUR-2r7iU.ttf" },
+//     { src: "http://fonts.gstatic.com/s/poiretone/v4/HrI4ZJpJ3Fh0wa5ofYMK8S3USBnSvpkopQaUR-2r7iU.ttf", fontStyle: "italic" },
+//   ]
+// });
 
 Font.register({
   family: "Montserrat",
   fonts: [
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-Thin.ttf", fontWeight: 100 },
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-ThinItalic.ttf", fontWeight: 100, fontStyle: "italic" },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-Thin.ttf", fontWeight: 100 },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-ThinItalic.ttf", fontWeight: 100, fontStyle: "italic" },
 
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-ExtraLight.ttf", fontWeight: 200 },
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-ExtraLightItalic.ttf", fontWeight: 200, fontStyle: "italic" },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-ExtraLight.ttf", fontWeight: 200 },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-ExtraLightItalic.ttf", fontWeight: 200, fontStyle: "italic" },
 
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-Light.ttf", fontWeight: 300 },
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-LightItalic.ttf", fontWeight: 300, fontStyle: "italic" },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-Light.ttf", fontWeight: 300 },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-LightItalic.ttf", fontWeight: 300, fontStyle: "italic" },
 
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-Regular.ttf", fontWeight: 400 },
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-Italic.ttf", fontWeight: 400, fontStyle: "italic" },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-Regular.ttf", fontWeight: 400 },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-Italic.ttf", fontWeight: 400, fontStyle: "italic" },
 
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-Medium.ttf", fontWeight: 500 },
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-MediumItalic.ttf", fontWeight: 500, fontStyle: "italic" },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-Medium.ttf", fontWeight: 500 },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-MediumItalic.ttf", fontWeight: 500, fontStyle: "italic" },
 
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-SemiBold.ttf", fontWeight: 600 },
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-SemiBoldItalic.ttf", fontWeight: 600, fontStyle: "italic" },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-SemiBold.ttf", fontWeight: 600 },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-SemiBoldItalic.ttf", fontWeight: 600, fontStyle: "italic" },
 
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-Bold.ttf", fontWeight: 700 },
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-BoldItalic.ttf", fontWeight: 700, fontStyle: "italic" },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-Bold.ttf", fontWeight: 700 },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-BoldItalic.ttf", fontWeight: 700, fontStyle: "italic" },
 
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-ExtraBold.ttf", fontWeight: 800 },
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-ExtraBoldItalic.ttf", fontWeight: 800, fontStyle: "italic" },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-ExtraBold.ttf", fontWeight: 800 },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-ExtraBoldItalic.ttf", fontWeight: 800, fontStyle: "italic" },
 
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-Black.ttf", fontWeight: 900 },
-    { src: "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-BlackItalic.ttf", fontWeight: 900, fontStyle: "italic" },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-Black.ttf", fontWeight: 900 },
+    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-BlackItalic.ttf", fontWeight: 900, fontStyle: "italic" },
   ]
 });
 
@@ -143,11 +143,11 @@ const baseStyles = {
     fontStyle: "italic"
   },
   code: {
-    fontFamily: "Courier",
+    // fontFamily: "Courier",
     padding: 2
   },
   codeBlock: {
-    fontFamily: "Courier",
+    // fontFamily: "Courier",
     padding: 8,
     marginVertical: 10
   },

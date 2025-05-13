@@ -3,7 +3,7 @@ import { Text, Link } from "@react-pdf/renderer";
 import { ComponentType, componentValidators, ThemeComponentProps } from "./validators";
 
 // Helper function to render individual child elements
-export const renderChildElement = (child, index, styles, stripStart = false) => {
+export const renderChildElement = (child: any, key: string | number, styles: any, stripStart = false) => {
   if (child.type === "text") {
     if (!child.value) return null;
     return stripStart ? child.value.replace(/^\n+/, '') : child.value;
@@ -11,30 +11,30 @@ export const renderChildElement = (child, index, styles, stripStart = false) => 
     switch (child.tagName) {
       case "strong":
         return (
-          <Text key={index} style={styles.strong}>
-            {child.children.map(c => c.value).join("")}
+          <Text key={key} style={styles.strong}>
+            {child.children.map((c: any) => c.value).join("")}
           </Text>
         );
       case "em":
         return (
-          <Text key={index} style={styles.em}>
-            {child.children.map(c => c.value).join("")}
+          <Text key={key} style={styles.em}>
+            {child.children.map((c: any) => c.value).join("")}
           </Text>
         );
       case "a":
         return (
-          <Link key={index} style={styles.link} src={child.properties.href}>
-            {child.children.map(c => c.value).join("")}
+          <Link key={key} style={styles.link} src={child.properties.href}>
+            {child.children.map((c: any) => c.value).join("")}
           </Link>
         );
       case "code":
         return (
-          <Text key={index} style={styles.code}>
-            {child.children.map(c => c.value).join("")}
+          <Text key={key} style={styles.code}>
+            {child.children.map((c: any) => c.value).join("")}
           </Text>
         );
       default:
-        let value = child.children.map(c => c.value).join("");
+        let value = child.children.map((c: any) => c.value).join("");
         return stripStart ? value.replace(/^\n+/, '') : value;
     }
   }
@@ -45,17 +45,20 @@ export const renderChildElement = (child, index, styles, stripStart = false) => 
  * Identifies custom components in a node's children
  * Returns an array of identified components with their indices
  */
-const identifyCustomComponents = (node, theme) => {
+const identifyCustomComponents = (node: any, theme: any) => {
   if (!node?.children?.length) return [];
 
-  const customComponents = [];
+  const customComponents: any[] = [];
 
   // Check each child for custom component types
-  node.children.forEach((child, index) => {
+  node.children.forEach((child: any, index: number) => {
     // Check against all registered validators
     Object.entries(componentValidators).forEach(([componentType, validator]) => {
       // Only process if theme has a renderer for this component type
       if (theme[componentType] && validator(child, index, node.children)) {
+        if (customComponents.length > 9999) {
+          console.warn("Too many custom components detected, skipping further processing.");
+        }
         customComponents.push({
           index,
           type: componentType as ComponentType,
@@ -64,17 +67,16 @@ const identifyCustomComponents = (node, theme) => {
       }
     });
   });
-
   return customComponents;
 };
 
 /**
  * Helper function to extract content from different component types
  */
-const extractComponentContent = (component, child) => {
+const extractComponentContent = (component: string, child: any) => {
   switch (component) {
     case 'strongTitle':
-      return { children: child.children.map(c => c.value).join("") };
+      return { children: child.children.map((c: any) => c.value).join("") };
     case 'tagList':
       // Parse tag list content with format "title: element 1 - element 2 - element N"
       // Match either "title: tag1 - tag2" or just "tag1 - tag2" format
@@ -82,7 +84,7 @@ const extractComponentContent = (component, child) => {
       if (tagMatch) {
         const [_, title, elementsStr] = tagMatch;
         // Split elements by dash separator and trim whitespace
-        const elements = elementsStr.split('-').map(elem => elem.trim()).filter(Boolean);
+        const elements = elementsStr.split('-').map((elem: string) => elem.trim()).filter(Boolean);
 
         return {
           title: title?.trim(),
@@ -92,14 +94,17 @@ const extractComponentContent = (component, child) => {
       }
       return { children: child.value };
     default:
-      return { children: (child.children ? child.children.map(c => c.value).join("") : child.value) || '' };
+      return { children: (child.children ? child.children.map((c: any) => c.value).join("") : child.value) || '' };
   }
 };
 
 /**
  * Splits text content around custom components and renders them
  */
-export const renderTextWithStyles = (node, theme, styles) => {
+export const renderTextWithStyles = (node: any, theme: any, styles: any) => {
+  // debug
+  // return <Text style={styles.p}>jeje</Text>;
+
   if (!node || !node.children) return null;
 
   // Identify custom components
@@ -109,7 +114,7 @@ export const renderTextWithStyles = (node, theme, styles) => {
   if (customComponents.length === 0) {
     return (
       <Text style={styles.p} wrap={true} orphans={0}>
-        {node.children.map((child, index) =>
+        {node.children.map((child: any, index: number) =>
           renderChildElement(child, index, styles)
         )}
       </Text>
@@ -120,7 +125,7 @@ export const renderTextWithStyles = (node, theme, styles) => {
   const segments = [];
   let currentIndex = 0;
 
-  customComponents.forEach((component, idx) => {
+  customComponents.forEach((component: any, idx: number) => {
     const { index, type, child } = component;
 
     // Add regular text before this custom component
@@ -129,7 +134,7 @@ export const renderTextWithStyles = (node, theme, styles) => {
         <Text key={`text-${currentIndex}`} style={styles.p} orphans={2}>
           {node.children
             .slice(currentIndex, index)
-            .map((child, childIdx) => {
+            .map((child: any, childIdx: number) => {
               const childKey = `${currentIndex}-${childIdx}`;
               return renderChildElement(child, childKey, styles);
             })}
@@ -167,7 +172,7 @@ export const renderTextWithStyles = (node, theme, styles) => {
   if (currentIndex < node.children.length) {
     segments.push(
       <Text key={`text-end`} style={styles.p}>
-        {node.children.slice(currentIndex).map((child, idx) => {
+        {node.children.slice(currentIndex).map((child: any, idx: number) => {
           const childKey = `end-${idx}`;
           return renderChildElement(child, childKey, styles, idx === 0);
         })}

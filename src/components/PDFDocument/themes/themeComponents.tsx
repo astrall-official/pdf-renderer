@@ -10,16 +10,16 @@ import Moon from "../assets/general/moon";
 /**
  * Default theme - uses base components without modifications
  */
-export const defaultTheme = (styles) => {
+export const defaultTheme = (styles: any) => {
   return createThemeComponents(styles);
 };
 
 /**
  * Astrology theme - custom components with astrology-themed decorations
  */
-export const astrologyTheme = (styles) => {
+export const astrologyTheme = (styles: any) => {
   const themeOverrides = {
-    h1: ({ children }) => (
+    h1: ({ children }: { children: React.ReactNode }) => (
       <View
         break
         wrap={false}
@@ -100,7 +100,7 @@ export const astrologyTheme = (styles) => {
         </View>
       </View>
     ),
-    h2: ({ children }) => (
+    h2: ({ children }: { children: React.ReactNode }) => (
       <View
         minPresenceAhead={80}
         wrap={false}
@@ -129,7 +129,7 @@ export const astrologyTheme = (styles) => {
         </View>
       </View>
     ),
-    h3: ({ children }) => (
+    h3: ({ children }: { children: React.ReactNode }) => (
       <View
         minPresenceAhead={80}
         wrap={false}
@@ -167,7 +167,7 @@ export const astrologyTheme = (styles) => {
         </View>
       </View>
     ),
-    h4: ({ children }) => (
+    h4: ({ children }: { children: React.ReactNode }) => (
       <View
         style={{
           display: "flex",
@@ -193,7 +193,7 @@ export const astrologyTheme = (styles) => {
         <EightPointedStar width={10} height={10} fill="#000" />
       </View>
     ),
-    blockquote: ({ children }) => (
+    blockquote: ({ children }: { children: React.ReactNode }) => (
       <View
         style={{
           ...styles.blockquote,
@@ -201,10 +201,10 @@ export const astrologyTheme = (styles) => {
           backgroundColor: "#f5f5f5"
         }}
       >
-        {children}
+        <Text>{children}</Text>
       </View>
     ),
-    strongTitle: ({ children, index }) => (
+    strongTitle: ({ children, index }: { children: React.ReactNode, index: number }) => (
       <View
         minPresenceAhead={80}
         wrap={false}
@@ -242,7 +242,7 @@ export const astrologyTheme = (styles) => {
         </View>
       </View>
     ),
-    tagList: ({ children, title, elements }) => (
+    tagList: ({ children, title, elements }: { children: React.ReactNode, title: string, elements: React.ReactNode[] }) => (
       <View
         wrap={false}
         minPresenceAhead={80}
@@ -262,7 +262,7 @@ export const astrologyTheme = (styles) => {
           {title}
         </Text>}
         <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", marginTop: 5, marginBottom: 20 }}>
-          {elements.map((element, idx) => (
+          {elements.map((element: React.ReactNode, idx: number) => (
             <View
               key={idx}
               style={{
@@ -293,9 +293,9 @@ export const astrologyTheme = (styles) => {
 /**
  * Professional theme - business-oriented styling
  */
-export const professionalTheme = (styles) => {
+export const professionalTheme = (styles: any) => {
   const themeOverrides = {
-    h1: ({ children }) => (
+    h1: ({ children }: { children: React.ReactNode }) => (
       <View>
         <Text
           break
@@ -309,7 +309,7 @@ export const professionalTheme = (styles) => {
         </Text>
       </View>
     ),
-    h2: ({ children }) => (
+    h2: ({ children }: { children: React.ReactNode }) => (
       <View>
         <Text
           style={{
@@ -321,7 +321,7 @@ export const professionalTheme = (styles) => {
         </Text>
       </View>
     ),
-    strongTitle: ({ children }) => (
+    strongTitle: ({ children }: { children: React.ReactNode }) => (
       <View style={{ marginTop: 15, marginBottom: 5 }}>
         <Text style={{ ...styles.h3, color: "#1a365d" }}>
           {children}
@@ -336,9 +336,9 @@ export const professionalTheme = (styles) => {
 /**
  * Dark theme - dark background with light text
  */
-export const darkTheme = (styles) => {
+export const darkTheme = (styles: any) => {
   const themeOverrides = {
-    h1: ({ children }) => (
+    h1: ({ children }: { children: React.ReactNode }) => (
       <View
         style={{
           backgroundColor: "#333",
@@ -357,7 +357,7 @@ export const darkTheme = (styles) => {
         </Text>
       </View>
     ),
-    strongTitle: ({ children }) => (
+    strongTitle: ({ children }: { children: React.ReactNode }) => (
       <View
         style={{
           backgroundColor: "#333",
@@ -390,13 +390,13 @@ const themeRegistry = {
  * @param {Object} styles - Styles object to apply
  * @returns {Object} Theme component set
  */
-export const getThemeComponents = (themeName, styles) => {
+export const getThemeComponents = (themeName: string, styles: any) => {
   // Check if requested theme exists, otherwise fall back to default
-  if (!themeName || !themeRegistry[themeName]) {
+  if (!themeName || !themeRegistry[themeName as keyof typeof themeRegistry]) {
     console.warn(`Theme "${themeName}" not found. Using default theme.`);
     return defaultTheme(styles);
   }
-  return themeRegistry[themeName](styles);
+  return themeRegistry[themeName as keyof typeof themeRegistry](styles);
 };
 
 /**

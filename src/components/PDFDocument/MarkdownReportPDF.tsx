@@ -55,7 +55,7 @@ const MarkdownReportPDF = ({
 
   return (
     <Document>
-      <Page size="A4" style={coverPageStyles.page}>
+      <Page size="RA4" style={coverPageStyles.page} wrap={true}>
         <View
           style={{
             position: "absolute",
@@ -77,23 +77,23 @@ const MarkdownReportPDF = ({
           }}
         />
         <View style={coverPageStyles.mainContent}>
-            <View style={coverPageStyles.icon}>
-              <Logo width={60} height={60} fill="white" />
-            </View>
-            <Text style={{...styles.h1, fontSize: 24, fontWeight: 200, maxWidth: 350}}>{documentName}</Text>
-            <Image src={"https://raw.githubusercontent.com/astrall-official/pdf-renderer/refs/heads/main/src/assets/img/astrology-wheel.jpg"} style={{ width: 400, height: 400, marginVertical: 20 }} />  
-            <Text style={styles.h1}>{userName}</Text>
-            <Text style={{...styles.h4, marginTop: 5 }}>{location}</Text>
-            <Text style={{...styles.h4, marginTop: 5}}>{birthDate} {birthTime || ''}</Text>
+          <View style={coverPageStyles.icon}>
+            <Logo width={60} height={60} fill="white" />
+          </View>
+          <Text style={{ ...styles.h1, fontSize: 24, fontWeight: 200, maxWidth: 350 }}>{documentName}</Text>
+          <Image src={"https://raw.githubusercontent.com/astrall-official/pdf-renderer/refs/heads/main/src/assets/img/astrology-wheel.jpg"} style={{ width: 400, height: 400, marginVertical: 20 }} />
+          <Text style={styles.h1}>{userName}</Text>
+          <Text style={{ ...styles.h4, marginTop: 5 }}>{location}</Text>
+          <Text style={{ ...styles.h4, marginTop: 5 }}>{birthDate} {birthTime || ''}</Text>
         </View>
       </Page>
-      <Page size="A4" style={styles.page}>
-      <Text render={({ pageNumber, totalPages }) => {
-        if (pageNumber <= 2) {
-          return "";
-        }
-        return pageNumber - 2
-      }} fixed style={{right: 30, bottom: 30, position: "absolute"}} />
+      <Page size="RA4" style={styles.page} wrap={true}>
+        <Text render={({ pageNumber, totalPages }) => {
+          if (pageNumber <= 2) {
+            return "";
+          }
+          return pageNumber - 2
+        }} fixed style={{ right: 30, bottom: 30, position: "absolute" }} />
         <Markdown
           key={markdown.length + theme}
           remarkPlugins={[remarkGfm]}
@@ -114,8 +114,8 @@ const MarkdownReportPDF = ({
             ul: components.ul,
             li: components.li,
             blockquote: components.blockquote,
-            pre: components.pre,
-            div: components.div,
+            // pre: components.pre,
+            //div: components.div,
           }}
         >
           {markdown}
