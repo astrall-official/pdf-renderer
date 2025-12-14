@@ -1,4 +1,15 @@
 import { StyleSheet, Font } from "@react-pdf/renderer";
+import path from "path";
+
+// Calculate absolute path to public/fonts/ttf directory
+const getPublicFontsPath = () => {
+  // Get the current working directory (project root)
+  const projectRoot = process.cwd();
+  // Build path to public/fonts/ttf
+  return path.join(projectRoot, 'public', 'fonts', 'ttf');
+};
+
+const fontsPath = getPublicFontsPath();
 
 Font.registerHyphenationCallback(word => {
   // Return entire word as unique part
@@ -25,32 +36,32 @@ Font.registerHyphenationCallback(word => {
 Font.register({
   family: "Montserrat",
   fonts: [
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-Thin.ttf", fontWeight: 100 },
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-ThinItalic.ttf", fontWeight: 100, fontStyle: "italic" },
+    { src: path.join(fontsPath, "Montserrat-Thin.ttf"), fontWeight: 100 },
+    { src: path.join(fontsPath, "Montserrat-ThinItalic.ttf"), fontWeight: 100, fontStyle: "italic" },
 
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-ExtraLight.ttf", fontWeight: 200 },
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-ExtraLightItalic.ttf", fontWeight: 200, fontStyle: "italic" },
+    { src: path.join(fontsPath, "Montserrat-ExtraLight.ttf"), fontWeight: 200 },
+    { src: path.join(fontsPath, "Montserrat-ExtraLightItalic.ttf"), fontWeight: 200, fontStyle: "italic" },
 
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-Light.ttf", fontWeight: 300 },
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-LightItalic.ttf", fontWeight: 300, fontStyle: "italic" },
+    { src: path.join(fontsPath, "Montserrat-Light.ttf"), fontWeight: 300 },
+    { src: path.join(fontsPath, "Montserrat-LightItalic.ttf"), fontWeight: 300, fontStyle: "italic" },
 
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-Regular.ttf", fontWeight: 400 },
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-Italic.ttf", fontWeight: 400, fontStyle: "italic" },
+    { src: path.join(fontsPath, "Montserrat-Regular.ttf"), fontWeight: 400 },
+    { src: path.join(fontsPath, "Montserrat-Italic.ttf"), fontWeight: 400, fontStyle: "italic" },
 
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-Medium.ttf", fontWeight: 500 },
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-MediumItalic.ttf", fontWeight: 500, fontStyle: "italic" },
+    { src: path.join(fontsPath, "Montserrat-Medium.ttf"), fontWeight: 500 },
+    { src: path.join(fontsPath, "Montserrat-MediumItalic.ttf"), fontWeight: 500, fontStyle: "italic" },
 
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-SemiBold.ttf", fontWeight: 600 },
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-SemiBoldItalic.ttf", fontWeight: 600, fontStyle: "italic" },
+    { src: path.join(fontsPath, "Montserrat-SemiBold.ttf"), fontWeight: 600 },
+    { src: path.join(fontsPath, "Montserrat-SemiBoldItalic.ttf"), fontWeight: 600, fontStyle: "italic" },
 
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-Bold.ttf", fontWeight: 700 },
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-BoldItalic.ttf", fontWeight: 700, fontStyle: "italic" },
+    { src: path.join(fontsPath, "Montserrat-Bold.ttf"), fontWeight: 700 },
+    { src: path.join(fontsPath, "Montserrat-BoldItalic.ttf"), fontWeight: 700, fontStyle: "italic" },
 
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-ExtraBold.ttf", fontWeight: 800 },
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-ExtraBoldItalic.ttf", fontWeight: 800, fontStyle: "italic" },
+    { src: path.join(fontsPath, "Montserrat-ExtraBold.ttf"), fontWeight: 800 },
+    { src: path.join(fontsPath, "Montserrat-ExtraBoldItalic.ttf"), fontWeight: 800, fontStyle: "italic" },
 
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-Black.ttf", fontWeight: 900 },
-    { src: "/Users/alstrat/Projects/emprendimientos/pdf-renderer/public/fonts/ttf/Montserrat-BlackItalic.ttf", fontWeight: 900, fontStyle: "italic" },
+    { src: path.join(fontsPath, "Montserrat-Black.ttf"), fontWeight: 900 },
+    { src: path.join(fontsPath, "Montserrat-BlackItalic.ttf"), fontWeight: 900, fontStyle: "italic" },
   ]
 });
 

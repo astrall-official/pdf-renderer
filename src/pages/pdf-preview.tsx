@@ -8,7 +8,7 @@ const PdfPreviewPage = () => {
   const [markdown, setMarkdown] = useState(exampleMarkdown);
   const [theme, setTheme] = useState("astrology");
   const [documentName, setdocumentName] = useState("3 PREGUNTAS A LAS ESTRELLAS");
-  const [userName, setUserName] = useState("Marta Alarcón");
+  const [userName, setUserName] = useState("Fernanda Escobar");
   const [viewerHeight, setViewerHeight] = useState("100%");
 
   return (
@@ -72,9 +72,9 @@ const PdfPreviewPage = () => {
           theme={theme}
           documentName={documentName}
           userName={userName}
-          location="Linares, Chile"
-          birthDate="1981-04-04"
-          birthTime="23:33"
+          location="Santiago, Chile"
+          birthDate="1995-NOV-18"
+          birthTime="12:00"
           viewerHeight={viewerHeight}
         />
       </div>

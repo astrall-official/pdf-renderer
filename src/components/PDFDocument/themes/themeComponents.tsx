@@ -254,13 +254,16 @@ export const astrologyTheme = (styles: any) => {
           alignContent: "center"
         }}
       >
-        {title && <Text
-          style={{
-            ...styles.h4,
-          }}
-        >
-          {title}
-        </Text>}
+        <View wrap={true} style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", marginTop: 5, marginBottom: 20 }}>
+          {title && <Text
+            style={{
+              ...styles.h4,
+            }}
+          >
+            {title}
+          </Text>}
+        </View>
+
         <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", marginTop: 5, marginBottom: 20 }}>
           {elements.map((element: React.ReactNode, idx: number) => (
             <View

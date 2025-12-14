@@ -1,0 +1,48 @@
+# Ignore dependencies
+node_modules
+.pnp
+.pnp.*
+.yarn
+
+# Build output
+.next
+out
+build
+coverage
+
+# Miscellaneous
+.DS_Store
+*.pem
+*.tsbuildinfo
+next-env.d.ts
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Env files
+.env*
+
+# Vercel
+.vercel
+
+# Local exports and examples
+exports
+examples
+
+# VSCode settings
+.vscode
+
+# Git
+.git 
+
+#Docker
+Dockerfile
+Makefile
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+docker-compose.yml

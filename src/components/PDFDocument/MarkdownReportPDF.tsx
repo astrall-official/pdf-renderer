@@ -53,6 +53,15 @@ const MarkdownReportPDF = ({
     },
   };
 
+  // Calculate processed markdown adding an \n character after at start of line if line contains '-' and ':'
+  const processedMarkdown = markdown.split('\n').map(line => {
+    // count number of '-' in line
+    const dashCount = (line.match(/-/g) || []).length;
+    if (dashCount > 1 && line.includes(':')) {
+      return '\n' + line + '\n';
+    }
+    return line + '\n';
+  }).join('');
   return (
     <Document>
       <Page size="RA4" style={coverPageStyles.page} wrap={true}>
@@ -95,7 +104,7 @@ const MarkdownReportPDF = ({
           return pageNumber - 2
         }} fixed style={{ right: 30, bottom: 30, position: "absolute" }} />
         <Markdown
-          key={markdown.length + theme}
+          key={processedMarkdown.length + theme}
           remarkPlugins={[remarkGfm]}
           components={{
             h1: components.h1,
@@ -118,7 +127,7 @@ const MarkdownReportPDF = ({
             //div: components.div,
           }}
         >
-          {markdown}
+          {processedMarkdown}
         </Markdown>
       </Page>
     </Document>
