@@ -6,7 +6,7 @@ const getPublicFontsPath = () => {
   // Get the current working directory (project root)
   const projectRoot = process.cwd();
   // Build path to public/fonts/ttf
-  return path.join(projectRoot, 'public', 'fonts', 'ttf');
+  return path.join(projectRoot, 'fonts', 'ttf');
 };
 
 const fontsPath = getPublicFontsPath();
@@ -84,28 +84,28 @@ const baseStyles = {
     marginBottom: 10,
     marginTop: 20,
     textTransform: "uppercase",
-    maxWidth: 350
+    maxWidth: 400
   },
   h2: {
     fontSize: 16,
     fontWeight: 400,
     marginBottom: 8,
     marginTop: 16,
-    maxWidth: 350
+    maxWidth: 400
   },
   h3: {
     fontSize: 14,
     fontWeight: 400,
     marginBottom: 6,
     marginTop: 14,
-    maxWidth: 350
+    maxWidth: 400
   },
   h4: {
     fontSize: 12,
     fontWeight: 500,
     marginBottom: 4,
-    marginTop: 12,
-    maxWidth: 350
+    marginTop: 12
+    // maxWidth removed - let it use full width
   },
   h5: {
     fontSize: 10,

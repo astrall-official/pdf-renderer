@@ -245,32 +245,36 @@ export const astrologyTheme = (styles: any) => {
     tagList: ({ children, title, elements }: { children: React.ReactNode, title: string, elements: React.ReactNode[] }) => (
       <View
         wrap={false}
-        minPresenceAhead={80}
+        minPresenceAhead={120}
         style={{
           display: "flex",
           flexDirection: "column",
-          flexWrap: "wrap",
           alignItems: "center",
-          alignContent: "center"
+          width: "100%",
+          marginVertical: 10
         }}
       >
-        <View wrap={true} style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", marginTop: 5, marginBottom: 20 }}>
-          {title && <Text
-            style={{
-              ...styles.h4,
-            }}
-          >
-            {title}
-          </Text>}
-        </View>
+        {title && (
+          <View style={{ width: "100%", marginBottom: 8 }}>
+            <Text
+              style={{
+                ...styles.h4,
+                textAlign: "center",
+                width: "100%"
+              }}
+            >
+              {title}
+            </Text>
+          </View>
+        )}
 
-        <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", marginTop: 5, marginBottom: 20 }}>
+        <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", width: "100%", marginBottom: 10 }}>
           {elements.map((element: React.ReactNode, idx: number) => (
             <View
               key={idx}
               style={{
-                marginBottom: 10,
-                marginHorizontal: 10,
+                marginBottom: 8,
+                marginHorizontal: 6,
               }}
             >
               <Text
@@ -278,7 +282,8 @@ export const astrologyTheme = (styles: any) => {
                   backgroundColor: "#444",
                   borderRadius: 50,
                   color: "#fff",
-                  padding: "5 10"
+                  padding: "5 10",
+                  fontSize: 10
                 }}
               >
                 {element}

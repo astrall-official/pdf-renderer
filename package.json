@@ -4,9 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev -p 3001",
+    "dev": "NODE_OPTIONS='--inspect' next dev -p 3002",
     "build": "next build",
-    "start": "next start -p 3001",
+    "start": "next start -p 3002",
     "lint": "next lint"
   },
   "dependencies": {
