@@ -6,7 +6,7 @@ const getPublicFontsPath = () => {
   // Get the current working directory (project root)
   const projectRoot = process.cwd();
   // Build path to public/fonts/ttf
-  return path.join(projectRoot, 'fonts', 'ttf');
+  return path.join(projectRoot, 'public', 'fonts', 'ttf');
 };
 
 const fontsPath = getPublicFontsPath();
