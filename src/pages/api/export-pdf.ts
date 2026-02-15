@@ -3,7 +3,6 @@ import { renderToFile } from "@react-pdf/renderer";
 import path from "path";
 import fs from "fs-extra";
 import React from "react";
-import { GcpStorageService } from "../../services/gcp-storage";
 import MarkdownReportPDF from "../../components/PDFDocument/MarkdownReportPDF";
 import { ExportPdfRequest } from "../../types";
 
@@ -32,6 +31,7 @@ export default async function handler(
     // Determine the content source and load it
     if (request.gcpFile) {
       const { bucketName, filePath } = request.gcpFile;
+      const { GcpStorageService } = await import("../../services/gcp-storage");
       const fileContent = await GcpStorageService.readTextFile(bucketName, filePath);
 
       markdown = fileContent; // Fix: assign to markdown variable
@@ -116,6 +116,7 @@ export default async function handler(
         const pdfBuffer = await fs.readFile(filePath);
 
         // Upload to GCP
+        const { GcpStorageService } = await import("../../services/gcp-storage");
         await GcpStorageService.uploadFile(
           bucketName,
           storagePath,
