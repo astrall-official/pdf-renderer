@@ -1,12 +1,42 @@
 import { StyleSheet, Font } from "@react-pdf/renderer";
 import path from "path";
+import fs from "fs";
 
-// Calculate absolute path to public/fonts/ttf directory
+// Font file used to validate that a candidate directory really contains the fonts
+const FONT_PROBE_FILE = "Montserrat-Regular.ttf";
+
+// Resolve the directory that contains the Montserrat TTF files.
+// The same code must work in local dev (`next dev`) and in the Docker image
+// (WORKDIR /usr/src/app, `next start`, fonts copied to ./public/fonts/ttf).
 const getPublicFontsPath = () => {
+  // In the browser (pdf-preview page) there is no filesystem: fonts are served
+  // by Next.js from the public folder at /fonts/ttf
+  if (typeof window !== "undefined") {
+    return "/fonts/ttf";
+  }
+
   // Get the current working directory (project root)
   const projectRoot = process.cwd();
-  // Build path to public/fonts/ttf
-  return path.join(projectRoot, 'public', 'fonts', 'ttf');
+  const candidates = [
+    // 1. Explicit override
+    process.env.FONTS_DIR,
+    // 2. Fonts inside public/ (local dev and Docker image, cwd = project root)
+    path.join(projectRoot, "public", "fonts", "ttf"),
+    // 3. Fonts at the root (e.g. if cwd is the public folder or fonts get copied to ./fonts)
+    path.join(projectRoot, "fonts", "ttf"),
+    // 4. Docker image location (WORKDIR /usr/src/app), in case cwd differs
+    path.join("/usr/src/app", "public", "fonts", "ttf"),
+  ].filter(Boolean);
+
+  const fontsDir = candidates.find((dir) => fs.existsSync(path.join(dir, FONT_PROBE_FILE)));
+  if (!fontsDir) {
+    throw new Error(
+      `[pdfThemes] Could not find ${FONT_PROBE_FILE}. Tried:\n` +
+        candidates.map((dir) => `  - ${dir}`).join("\n") +
+        "\nSet FONTS_DIR to the directory that contains the Montserrat TTF files."
+    );
+  }
+  return fontsDir;
 };
 
 const fontsPath = getPublicFontsPath();
