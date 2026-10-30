@@ -1,0 +1,9 @@
+services:
+  pdf-renderer:
+    image: us-central1-docker.pkg.dev/bold-vortex-332122/astrall/pdf-renderer:staging
+    restart: always
+    volumes:
+      - ~/.config/gcloud/application_default_credentials_astrall.json:/root/.config/gcloud/application_default_credentials.json:ro
+      - ./shared:/usr/src/app/shared
+    ports:
+      - 3002:3001
