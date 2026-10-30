@@ -6,43 +6,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a Next.js application that renders markdown content as styled PDFs using @react-pdf/renderer. The system supports theming, Google Cloud Storage integration, and custom markdown components for specialized rendering (particularly astrology-themed documents).
 
+## Desarrollo y validación (obligatorio)
+- Antes de cambiar código, lee `DEVELOPMENT.md`: cómo correr, testear y validar este repo, y problemas conocidos.
+- Todo problema nuevo del flujo de desarrollo, y toda forma de testeo/validación que funcione, se registra en `DEVELOPMENT.md` en el mismo cambio. CLAUDE.md no documenta features: indica cómo desarrollar y validar sin que se pase nada.
+- Cambios que afecten a otro repo (payload/respuesta de `/api/export-pdf` que llama product-workflow, temas usados en product definitions, rutas GCS, patrones de markdown que generan los prompts n8n) se validan en conjunto con ambos servicios corriendo en local (ver "Integración" en DEVELOPMENT.md).
+
 ## Development Commands
 
-### Local Development
-```bash
-# Start development server on port 3001
-yarn dev
-# or
-make dev
-
-# Build for production
-yarn build
-# or
-make build
-
-# Start production server
-yarn start
-# or
-make start
-
-# Lint
-yarn lint
-```
-
-### Docker Deployment
-```bash
-# Build and push to Google Artifact Registry
-make deploy
-
-# Clean up Docker images
-make clean
-```
-
-**Important**: Configure Google Artifact Registry variables in Makefile before deployment:
-- `GAR_LOCATION` (default: us-central1)
-- `GAR_PROJECT_ID` (default: bold-vortex-332122)
-- `GAR_REPOSITORY` (default: astrall)
-- `IMAGE_NAME` (default: pdf-renderer)
+Movidos a `DEVELOPMENT.md` (Node 18, `npm ci`, `npx next dev -p 3001`, checklist de validación, deploy `make deploy`). Variables GAR del Makefile: `GAR_LOCATION`, `GAR_PROJECT_ID`, `GAR_REPOSITORY`, `IMAGE_NAME`.
 
 ## Architecture
 
@@ -77,7 +48,7 @@ make clean
 
 ### Font System
 
-The project uses Montserrat font family (weights 100-900) loaded from local TTF files in `/fonts/ttf/`. Fonts are registered in `src/styles/pdfThemes.js` using @react-pdf/renderer's Font.register API.
+The project uses Montserrat font family (weights 100-900) loaded from local TTF files in `public/fonts/ttf/` (resolved from candidate paths for dev and Docker). Fonts are registered in `src/styles/pdfThemes.js` using @react-pdf/renderer's Font.register API.
 
 ### API Request Format
 
