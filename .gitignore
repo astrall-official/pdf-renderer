@@ -44,3 +44,6 @@ exports
 
 # local example outputs (docker-compose volume)
 /shared/
+
+# tests: PDF generado, PNG de antes/después/diff y build de los tests
+/tests/output/

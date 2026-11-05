@@ -1,14 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import PDFPreviewRenderer from "../components/PDFDocument/PDFPreviewRenderer";
-import { exampleMarkdown } from "../data/exampleMarkdown";
+import { exampleMarkdown, exampleMetadata } from "../data/exampleMarkdown";
 import styles from "../styles/PdfPreview.module.css";
 
 const PdfPreviewPage = () => {
   const [markdown, setMarkdown] = useState(exampleMarkdown);
   const [theme, setTheme] = useState("astrology");
-  const [documentName, setdocumentName] = useState("3 PREGUNTAS A LAS ESTRELLAS");
-  const [userName, setUserName] = useState("Fernanda Escobar");
+  const [documentName, setdocumentName] = useState(exampleMetadata.documentName);
+  const [userName, setUserName] = useState(exampleMetadata.userName);
   const [viewerHeight, setViewerHeight] = useState("100%");
 
   return (
@@ -72,9 +72,9 @@ const PdfPreviewPage = () => {
           theme={theme}
           documentName={documentName}
           userName={userName}
-          location="Santiago, Chile"
-          birthDate="1995-NOV-18"
-          birthTime="12:00"
+          location={exampleMetadata.location}
+          birthDate={exampleMetadata.birthDate}
+          birthTime={exampleMetadata.birthTime}
           viewerHeight={viewerHeight}
         />
       </div>

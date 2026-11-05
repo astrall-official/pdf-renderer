@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Instalar poppler (pdftotext, pdftoppm, pdfinfo)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends poppler-utils && pdftotext -v
+
+      - run: npm ci
+
+      - name: Tipos
+        run: npx tsc --noEmit
+
+      - name: Tests (PDF golden y logs sin datos personales)
+        run: npm test
+
+      - name: Subir antes/después/diff si el golden falla
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: golden-diff
+          path: tests/output/diff/
+          if-no-files-found: ignore
+          retention-days: 7

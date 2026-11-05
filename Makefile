@@ -7,7 +7,7 @@ OUTPUT_FILE = $(OUTPUT_DIR)/example-report.pdf
 GCP_BUCKET_NAME ?= astrall-reports
 GCP_DOC_TYPE ?= report
 GCP_AREA ?= general
-GCP_NAME ?= "gabriel_bermúdez"
+GCP_NAME ?= "tomas_ejemplo"
 GCP_FORMAT ?= "full"
 GCP_INPUT_PATH ?= reports/$(GCP_DOC_TYPE)/$(GCP_AREA)/$(GCP_NAME)_$(GCP_FORMAT).txt
 GCP_OUTPUT_PATH ?= pdf/$(GCP_DOC_TYPE)/$(GCP_AREA)/$(GCP_NAME)_$(GCP_FORMAT).pdf
@@ -24,9 +24,9 @@ GAR_IMAGE_PATH = $(GAR_LOCATION)-docker.pkg.dev/$(GAR_PROJECT_ID)/$(GAR_REPOSITO
 
 help:
 	@echo "Available commands:"
-	@echo "  make build                   - Build the Next.js application (yarn build)"
-	@echo "  make start                   - Start the Next.js application (yarn start)"
-	@echo "  make dev                     - Start the Next.js application in development mode (yarn dev)"
+	@echo "  make build                   - Build the Next.js application (npm run build)"
+	@echo "  make start                   - Start the Next.js application (npm start)"
+	@echo "  make dev                     - Start the Next.js application in development mode (npm run dev)"
 	@echo "  make generate-example-pdf    - Generate an example PDF from local markdown file"
 	@echo "  make generate-gcp-pdf        - Generate a PDF from a file stored in GCP"
 	@echo "                                 Usage: make generate-gcp-pdf GCP_BUCKET_NAME=bucket GCP_DOC_TYPE=type ..."
@@ -44,13 +44,13 @@ help:
 	@echo "Output: $(GCP_BUCKET_NAME):$(GCP_OUTPUT_PATH)"
 
 build:
-	yarn build
+	npm run build
 
 start:
-	yarn start
+	npm start
 
 dev:
-	yarn dev
+	npm run dev
 
 
 # Tag the Docker image for Google Artifact Registry

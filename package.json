@@ -7,7 +7,9 @@
     "dev": "NODE_OPTIONS='--inspect' next dev -p 3001",
     "build": "next build",
     "start": "next start -p 3001",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "node tests/run.mjs",
+    "test:golden:update": "GOLDEN_UPDATE=1 node tests/run.mjs golden"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.15.2",
@@ -19,15 +21,19 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0",
-    "react-pdf": "^10.2.0",
-    "react-router-dom": "^7.3.0",
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/pngjs": "^6.0.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "esbuild": "0.25.12",
+    "pixelmatch": "^8.0.0",
+    "pngjs": "^7.0.0",
     "typescript": "^5"
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "engines": {
+    "node": ">=18"
+  }
 }

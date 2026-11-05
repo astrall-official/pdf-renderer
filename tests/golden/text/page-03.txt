@@ -1,0 +1,27 @@
+CONFIGURACIÓN CARTA NATAL
+Distribución de Carta Natal en Signos:
+Sol en Geminis, Aire
+Luna en Tauro, Tierra
+Ascendente en Cáncer, Agua
+Mercurio en Cáncer, Agua
+Venus en Tauro, Tierra
+Marte en Leo, Fuego
+Júpiter en Libra, Aire
+Saturno en Piscis, Agua
+Urano en Capricornio, Tierra
+Neptuno en Capricornio, Tierra
+Plutón en Escorpio, Agua
+Medio Cielo (MC) en Aries, Fuego
+
+Distribución de planetas en casas:
+• Casa 1: Mercurio, Asc
+• Casa 2: Marte
+• Casa 3: Júpiter
+• Casa 4: Vacía
+• Casa 5: Plutón
+• Casa 6: Vacía
+• Casa 7: Neptuno, Urano
+
+1
+
+

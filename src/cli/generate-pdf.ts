@@ -29,9 +29,9 @@ Required arguments:
   source        - Path to source file (local path or bucket:path format)
   documentName  - Name of the report document (e.g. "Interpretación Astrológica")
   userName      - Name of the person (e.g. "Jane Doe")
-  birthDate     - Birth date in YYYY-MM-DD format (e.g. "1985-03-04")
+  birthDate     - Birth date in YYYY-MM-DD format (e.g. "1990-06-15")
   location      - Birth location (e.g. "Santiago, Chile")
-  birthTime     - Birth time (e.g. "14:40")
+  birthTime     - Birth time (e.g. "12:00")
 
 Optional arguments:
   outputPath    - Path where the PDF will be saved locally (default: public/exports/username-timestamp.pdf)

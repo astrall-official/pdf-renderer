@@ -27,10 +27,10 @@ const MarkdownReportPDF = ({
   markdown,
   theme = "astrology",
   documentName = "Interpretación Consultas Astrológicas",
-  userName = "Ximena Vallejos",
-  location = "Villarrica, Chile",
-  birthDate = "1985-03-04",
-  birthTime = "14:40"
+  userName = "Tomás Ejemplo",
+  location = "Santiago, Chile",
+  birthDate = "1990-06-15",
+  birthTime = "12:00"
 }: { markdown: string; theme?: string; documentName?: string; userName?: string; location?: string; birthDate?: string; birthTime?: string; }) => {
   const styles = getTheme(theme);
   const components = getThemeComponents(theme, styles);

@@ -46,3 +46,5 @@ Makefile
 *.tsbuildinfo
 next-env.d.ts
 docker-compose.yml
+# tests (base golden y runner): no van a la imagen
+tests

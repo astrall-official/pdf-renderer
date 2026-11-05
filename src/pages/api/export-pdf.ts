@@ -25,8 +25,15 @@ export default async function handler(
     const request: ExportPdfRequest = req.body;
     let markdown: string;
 
-    // Add debug message
-    console.log("Received request:", request);
+    // Solo bucket, rutas y tema: nunca nombre, fecha, hora ni lugar de nacimiento
+    // (tests/no-pii-logs.test.ts lo verifica).
+    console.log("export-pdf request:", {
+      gcpFile: request.gcpFile,
+      sourceFilePath: request.sourceFilePath,
+      outputPath: request.outputPath,
+      outputStorageFilePath: request.outputStorageFilePath,
+      theme: request.theme || "astrology",
+    });
 
     // Determine the content source and load it
     if (request.gcpFile) {
