@@ -79,8 +79,13 @@ que se acepta se valida con `product-workflow` corriendo contra este servidor lo
   `product-workflow/DEVELOPMENT.md`).
 
 ## Deploy
-- `make deploy` construye la imagen y sube `pdf-renderer:latest` a GAR (`bold-vortex-332122`,
-  `us-central1`, repositorio `astrall`). Dokploy la usa para cada venta: **se pregunta antes**.
+- Desde el 5-nov-2026 cada versión se sube con un tag con fecha y `:latest` no se toca: queda como
+  respaldo. `make deploy IMAGE_TAG=AAAA-MM-DD` construye y sube solo ese tag a GAR (`bold-vortex-332122`,
+  `us-central1`, repositorio `astrall`), con `CLOUDSDK_CONFIG=~/.config/gcloud-astrall`. Producción
+  cambia cuando el compose de Dokploy apunta a ese tag: **se pregunta antes**.
+- Las imágenes son arm64, igual que la VM, así que se construyen en este Mac.
+- Antes de subir, prueba la imagen sin red: `docker run -d --network none`, y un `export-pdf` con
+  `docker exec … wget`. Mira la portada y confirma que el log no traiga datos personales.
 - `:staging` es la imagen de los compose local y staging de `product-workflow`. Subirla también se
   pregunta.
 - Es la única tarea pesada mientras corre. Docker se apaga al terminar.

@@ -8,14 +8,17 @@ saca de aquí y va a `docs/archive/backlog/AAAA-MM-DD-HHMM-<tema>.md` (ver `docs
 
 - **El repo es público** y su historial trae un reporte real y nombres, fechas y lugares de nacimiento
   de clientas. El fundador pidió dejarlo privado (5-nov-2026). La rueda de la portada ya sale de
-  `public/img/`, pero producción sigue pidiéndola a GitHub hasta el próximo `make deploy`. Orden:
-  desplegar, comprobar un PDF y recién entonces pasar a privado. El fixture
+  `public/img/`, en la imagen `:2026-11-05`, probada sin red. Producción sigue en `:latest`, que pide
+  la rueda a GitHub, hasta que Dokploy apunte a `:2026-11-05`. Orden: cambiar Dokploy, comprobar un PDF
+  y recién entonces pasar a privado. El plan gratis de GitHub no permite impedir que los miembros
+  creen repos públicos. El fixture
   (`src/data/exampleMarkdown.js`) conserva las posiciones y el texto de esa lectura real, sin nombre.
 - **La imagen de producción trae 565 PDFs de clientas** (comprobado el 5-nov-2026 leyendo las capas en
   GAR). `:latest`, que también tiene el tag `:staging`, del 14-feb-2026, lleva `public/exports/` con
   PDFs vendidos de marzo a mayo de 2025, con nombre y apellido en el archivo. Next los sirve en
-  `/exports/<archivo>.pdf`. Ya no están en el disco ni entran en una imagen nueva (`609f419`). Se
-  cierra con el próximo `make deploy` y borrando de GAR las imágenes viejas, que también los traen.
+  `/exports/<archivo>.pdf`. Ya no están en el disco y `:2026-11-05` no los trae. Se cierra cuando
+  Dokploy use `:2026-11-05` y se borren de GAR las imágenes viejas. El fundador decidió dejar como
+  respaldo la que corre hoy (`:latest`) y borrar las demás.
 - **Confirmar si el renderer de producción se ve desde internet.** `product-workflow/docker-compose.yml`
   publica el 3001 en un puerto aleatorio del host. `/api/export-pdf` acepta `sourceFilePath` y
   `outputPath` libres: lee y escribe cualquier ruta del contenedor, incluida la credencial de GCS
