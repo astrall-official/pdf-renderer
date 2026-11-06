@@ -31,10 +31,18 @@ saca de aquí y va a `docs/archive/backlog/AAAA-MM-DD-HHMM-<tema>.md` (ver `docs
   Next 15.2.2. Además, Node 18 ya no tiene soporte. Se actualizan Next, `@react-pdf/renderer` y Node con
   el test visual como red: si cambia el PDF, el fundador lo ve antes de desplegar.
 
+- **Los emojis de signos salen rotos en los PDF vendidos** (visto el 5-nov-2026 en el reporte de ejemplo,
+  página 11). `♈️`–`♓️` de "Compatibilidad con signos zodiacales" no existen en Montserrat y se dibujan
+  como letras sueltas encima del nombre del signo. Arreglo rápido: quitarlos en `helpers/renderHelper.tsx`.
+  Cambia la página 11 del golden, así que el fundador la ve antes de desplegar.
+
 ## 2. Rediseño del PDF con el estilo de la app
 
 Feature grande: antes de implementar, el fundador valida en visual una propuesta (skill `presentar`)
 con unas pocas páginas representativas.
+Propuesta del 5-nov-2026, con 3 portadas candidatas (`gpt-image-2.6-sunburst`, originales en
+`astrall-app/design/art/originals/pdf-cover/`) y los gaps técnicos:
+`astrall-app/docs/propuestas/2026-11-05-pdf-rediseno.html`. Espera las decisiones del fundador.
 
 - Que el PDF se vea como `app.astrall.space`: paleta, tipografía e ilustraciones y stickers del sistema
   de arte de la app (`astrall-app/docs/desarrollo/arte.md`).
