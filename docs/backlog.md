@@ -16,9 +16,9 @@ saca de aquí y va a `docs/archive/backlog/AAAA-MM-DD-HHMM-<tema>.md` (ver `docs
 - **La imagen de producción trae 565 PDFs de clientas** (comprobado el 5-nov-2026 leyendo las capas en
   GAR). `:latest`, que también tiene el tag `:staging`, del 14-feb-2026, lleva `public/exports/` con
   PDFs vendidos de marzo a mayo de 2025, con nombre y apellido en el archivo. Next los sirve en
-  `/exports/<archivo>.pdf`. Ya no están en el disco y `:2026-11-05` no los trae. Se cierra cuando
-  Dokploy use `:2026-11-05` y se borren de GAR las imágenes viejas. El fundador decidió dejar como
-  respaldo la que corre hoy (`:latest`) y borrar las demás.
+  `/exports/<archivo>.pdf`. Ya no están en el disco y `:2026-11-05` no los trae. Las imágenes viejas
+  ya se borraron de GAR (5-nov-2026). Queda solo `:latest`, como respaldo, por decisión del fundador.
+  Se cierra cuando Dokploy use `:2026-11-05`; después se decide si `:latest` se borra.
 - **Confirmar si el renderer de producción se ve desde internet.** `product-workflow/docker-compose.yml`
   publica el 3001 en un puerto aleatorio del host. `/api/export-pdf` acepta `sourceFilePath` y
   `outputPath` libres: lee y escribe cualquier ruta del contenedor, incluida la credencial de GCS
