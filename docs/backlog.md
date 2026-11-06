@@ -19,7 +19,9 @@ saca de aquí y va a `docs/archive/backlog/AAAA-MM-DD-HHMM-<tema>.md` (ver `docs
   `/exports/<archivo>.pdf`. Ya no están en el disco y `:2026-11-05` no los trae. Las imágenes viejas
   ya se borraron de GAR (5-nov-2026). Queda solo `:latest`, como respaldo, por decisión del fundador.
   Se cierra cuando Dokploy use `:2026-11-05`; después se decide si `:latest` se borra.
-- **Confirmar si el renderer de producción se ve desde internet.** `product-workflow/docker-compose.yml`
+- **Confirmar si el renderer de producción se ve desde internet** (prioridad baja: el fundador cree que
+  no, y `product-workflow` no usa links públicos, porque descarga con credenciales y manda el PDF por
+  correo). `product-workflow/docker-compose.yml`
   publica el 3001 en un puerto aleatorio del host. `/api/export-pdf` acepta `sourceFilePath` y
   `outputPath` libres: lee y escribe cualquier ruta del contenedor, incluida la credencial de GCS
   montada. Primero se revisa en la VM sin cambiar nada (`docker ps` y firewall). Después:
