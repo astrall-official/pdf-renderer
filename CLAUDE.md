@@ -1,115 +1,66 @@
-# CLAUDE.md
+# CLAUDE.md — pdf-renderer
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Convierte en PDF el markdown de las lecturas que se venden. Es un servicio Next 15 con
+`@react-pdf/renderer`: `product-workflow` le pasa el texto en GCS y él sube el PDF que recibe la clienta.
+Solo renderiza. El texto lo escriben los prompts de `product-workflow` y la carta la dibuja
+`astrall-front`. El método de trabajo está en el `CLAUDE.md` del workspace (`../CLAUDE.md`): roles,
+autonomía, sub-agentes y cómo reportar.
 
-## Project Overview
+## Antes de tocar
+- **`DEVELOPMENT.md`:** cómo está armado, cómo correr, testear y desplegar, y problemas conocidos.
+- **`docs/backlog.md`:** qué falta y en qué orden.
+- **Decisiones:** `../astrall-app/docs/facts/decisiones.md`, que es el único lugar. Las de este repo
+  dicen "PDF".
 
-This is a Next.js application that renders markdown content as styled PDFs using @react-pdf/renderer. The system supports theming, Google Cloud Storage integration, and custom markdown components for specialized rendering (particularly astrology-themed documents).
+## Validar
 
-## Desarrollo y validación (obligatorio)
-- Antes de cambiar código, lee `DEVELOPMENT.md`: cómo correr, testear y validar este repo, y problemas conocidos.
-- Todo problema nuevo del flujo de desarrollo, y toda forma de testeo/validación que funcione, se registra en `DEVELOPMENT.md` en el mismo cambio. CLAUDE.md no documenta features: indica cómo desarrollar y validar sin que se pase nada.
-- Cambios que afecten a otro repo (payload/respuesta de `/api/export-pdf` que llama product-workflow, temas usados en product definitions, rutas GCS, patrones de markdown que generan los prompts n8n) se validan en conjunto con ambos servicios corriendo en local (ver "Integración" en DEVELOPMENT.md).
-
-## Development Commands
-
-Movidos a `DEVELOPMENT.md` (Node 18, `npm ci`, `npx next dev -p 3001`, checklist de validación, deploy `make deploy`). Variables GAR del Makefile: `GAR_LOCATION`, `GAR_PROJECT_ID`, `GAR_REPOSITORY`, `IMAGE_NAME`.
-
-## Architecture
-
-### PDF Generation Flow
-
-1. **Entry Points**:
-   - API Route: `/api/export-pdf` - Generates and saves PDF files
-   - API Route: `/api/preview-pdf` - Returns base64-encoded PDF for preview
-   - Frontend: `/pdf-preview` page for live preview
-
-2. **Core Components**:
-   - `MarkdownReportPDF` (src/components/PDFDocument/MarkdownReportPDF.tsx) - Main PDF document component that orchestrates rendering
-   - Uses react-markdown to parse markdown with remark-gfm for GitHub-flavored markdown support
-
-3. **Theming System**:
-   - **Style Definitions**: `src/styles/pdfThemes.js` defines base styles for typography, spacing, and colors
-   - **Theme Components**: `src/components/PDFDocument/themes/themeComponents.tsx` defines visual rendering for each theme
-   - **Component Factory**: `src/components/PDFDocument/factory/componentsFactory.tsx` merges base components with theme overrides
-   - Available themes: `default`, `astrology`, `professional`, `dark`
-   - The astrology theme includes custom decorative SVG components (stars, moons, lines)
-
-4. **Custom Markdown Components**:
-   The system extends standard markdown with custom components identified by validators:
-   - **strongTitle**: Bold text (e.g., `**Title**`) rendered with decorative elements in themed styles
-   - **tagList**: Formatted as `title: tag1 - tag2 - tag3` or just `tag1 - tag2 - tag3`
-   - Validators located in `src/components/PDFDocument/helpers/validators/`
-   - `renderHelper.tsx` processes AST nodes to identify and render custom components
-
-5. **Google Cloud Storage Integration**:
-   - `GcpStorageService` (src/services/gcp-storage.ts) handles reading markdown from GCS and uploading generated PDFs
-   - Authentication uses Google Cloud Storage SDK with default credentials
-
-### Font System
-
-The project uses Montserrat font family (weights 100-900) loaded from local TTF files in `public/fonts/ttf/` (resolved from candidate paths for dev and Docker). Fonts are registered in `src/styles/pdfThemes.js` using @react-pdf/renderer's Font.register API.
-
-### API Request Format
-
-The `/api/export-pdf` endpoint accepts:
-```typescript
-{
-  // Content source (one required):
-  sourceFilePath?: string,  // Local file path
-  gcpFile?: { bucketName: string, filePath: string },
-
-  // Output configuration:
-  outputPath?: string,  // Custom output path (optional)
-  outputStorageFilePath?: { bucketName: string, filePath: string },  // Upload to GCS
-
-  // PDF metadata:
-  theme?: 'default' | 'astrology' | 'professional' | 'dark',
-  documentName?: string,
-  userName?: string,
-  birthDate?: string,
-  birthTime?: string,
-  location?: string
-}
+```bash
+./pesado.sh pdf-renderer npm test                  # desde la raíz del workspace; lo mismo corre en CI
+./pesado.sh pdf-renderer npx tsc --noEmit
 ```
 
-### Important Technical Details
+- `npm test` compara el PDF del reporte de ejemplo, página por página, contra la versión aprobada en
+  `tests/golden/`. Si falla, deja el antes, el después y la diferencia de cada página que cambió
+  (`DEVELOPMENT.md`, "Test visual").
+- Una base nueva solo se aprueba (`npm run test:golden:update`) cuando el cambio visual era lo buscado
+  y el fundador ya lo vio.
+- Cambios en el payload de `/api/export-pdf`, en el markdown que llega o en las rutas de GCS: se validan
+  con `product-workflow` corriendo contra este servidor local (`DEVELOPMENT.md`, "Integración").
+- CI en rojo en `main` se arregla antes de seguir.
 
-1. **TypeScript Strictness**: The codebase uses `// @ts-nocheck` and `@ts-ignore` in some PDF components due to react-pdf/renderer type compatibility issues. This is expected.
+## Qué valida el fundador y qué decides tú
+- **El fundador ve todo cambio visible del PDF antes de desplegar:** portada, tipografía, colores,
+  márgenes, ilustraciones y cortes de página. Usa la skill `presentar` con antes y después de unas
+  pocas páginas representativas (portada, una con título y etiquetas, una con corte de página y el
+  cierre), no el PDF entero. Las imágenes salen de los PNG que deja `npm test`.
+- **Tú decides:** cambios sin efecto visual (el test pasa sin aprobar una base nueva), refactors,
+  tests, dependencias y arreglos de errores.
 
-2. **Cover Page**: The first page is a custom cover page with document metadata, followed by paginated content starting from page 2.
+## Ambientes
+- **Producción:** la imagen `pdf-renderer:latest` en GAR, que corre en Dokploy (VM Hetzner) junto a
+  `product-workflow`. Con ella se arma cada PDF vendido. `make deploy` la reemplaza, así que se
+  pregunta antes.
+- **`:staging`:** la usa el compose de `product-workflow` en local y en staging. Subirla también se
+  pregunta.
+- **Local:** `npx next dev -p 3001`, libre.
 
-3. **Page Numbering**: Pages display `pageNumber - 2` to account for the cover page (see MarkdownReportPDF.tsx:91-96).
+Se trabaja directo en `main`, porque nada se despliega solo: producción cambia únicamente con
+`make deploy`.
 
-4. **Custom Component Detection**: The rendering system scans markdown AST for patterns matching custom components (validators return true/false for each child node).
-
-5. **Wrapping & Orphan Control**: The system uses `minPresenceAhead`, `wrap={false}`, and `orphans` props to control page breaks and prevent awkward splits.
-
-## Project Structure Highlights
-
-- **API Routes**: Standard Next.js API routes in `src/pages/api/`
-- **PDF Components**: All PDF-related code in `src/components/PDFDocument/`
-  - `core/` - Base components
-  - `themes/` - Theme-specific component overrides
-  - `factory/` - Component composition logic
-  - `helpers/` - Rendering utilities and validators
-  - `assets/` - SVG decorative elements
-- **Services**: `src/services/gcp-storage.ts` for GCP integration
-- **CLI Scripts**: `src/cli/` (currently minimal/placeholder)
-
-## Common Modifications
-
-### Adding a New Theme
-1. Define styles in `src/styles/pdfThemes.js`
-2. Create theme function in `src/components/PDFDocument/themes/themeComponents.tsx`
-3. Register in `themeRegistry` object
-4. Export via `getAvailableThemes()`
-
-### Adding a Custom Markdown Component
-1. Create validator in `src/components/PDFDocument/helpers/validators/`
-2. Register in `componentValidators` object (validators/index.ts)
-3. Implement rendering in theme component overrides
-4. The component will be detected and rendered via `renderTextWithStyles` in `renderHelper.tsx`
-
-### Modifying Cover Page
-Edit `MarkdownReportPDF.tsx` lines 58-89 (first Page component).
+## Errores que ya pasaron
+- **Datos reales de clientas en el repo, que es público.** Había un reporte real, nombres y fechas de
+  nacimiento en el preview, en los valores por defecto de la portada y en archivos sueltos. Además,
+  `public/exports/` juntó cientos de PDFs vendidos que se colaban en la imagen Docker. Todo ejemplo usa
+  una persona ficticia (`exampleMetadata`), también en `shared/`, en `public/exports/` y en los
+  scripts. Un PDF de una venta real se revisa fuera del repo y se borra al terminar.
+- **El log no lleva datos personales.** `/api/export-pdf` registraba el request entero, con nombre,
+  fecha, hora y lugar de nacimiento. Lo cubre un test.
+- **Las fuentes se buscan en rutas distintas en dev y en Docker** (`src/styles/pdfThemes.js`). Un
+  cambio de fuentes o de rutas se prueba en los dos.
+- **El arte no entra al repo ni a la imagen.** Las ilustraciones de Astrall se piden a
+  `art.astrall.space` cuando hacen falta, igual que en la app (`../astrall-app/docs/desarrollo/arte.md`).
+- **npm, no yarn:** el lockfile es de npm.
+- **La portada depende de una URL de GitHub** (`raw.githubusercontent.com`). No muevas ni renombres
+  `src/assets/img/astrology-wheel.jpg` mientras no se sirva en local.
+- **El puerto 3001 lo ocupan otros:** el contenedor del compose de `product-workflow` y
+  `granade-marketplace`. Detén el otro antes de levantar este.
