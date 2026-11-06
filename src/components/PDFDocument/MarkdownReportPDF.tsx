@@ -3,7 +3,7 @@ import React from "react";
 // @ts-ignore
 import Markdown from "react-markdown";
 import { Document, Page, View, Text, Image } from "@react-pdf/renderer";
-import { getTheme } from "../../styles/pdfThemes";
+import { getTheme, coverWheelSrc } from "../../styles/pdfThemes";
 // @ts-ignore
 import remarkGfm from "remark-gfm";
 import { default as Logo } from "./assets/general/logo";
@@ -90,7 +90,7 @@ const MarkdownReportPDF = ({
             <Logo width={60} height={60} fill="white" />
           </View>
           <Text style={{ ...styles.h1, fontSize: 24, fontWeight: 200, maxWidth: 350 }}>{documentName}</Text>
-          <Image src={"https://raw.githubusercontent.com/astrall-official/pdf-renderer/refs/heads/main/src/assets/img/astrology-wheel.jpg"} style={{ width: 400, height: 400, marginVertical: 20 }} />
+          <Image src={coverWheelSrc} style={{ width: 400, height: 400, marginVertical: 20 }} />
           <Text style={styles.h1}>{userName}</Text>
           <Text style={{ ...styles.h4, marginTop: 5 }}>{location}</Text>
           <Text style={{ ...styles.h4, marginTop: 5 }}>{birthDate} {birthTime || ''}</Text>

@@ -16,7 +16,7 @@ async function generatePdf() {
 
   if (args.length < 6) {
     console.error(`
-Usage: yarn generate-pdf <source> <documentName> <userName> <birthDate> <location> <birthTime> [outputPath] [outputStorage]
+Usage: npx tsx src/cli/generate-pdf.ts <source> <documentName> <userName> <birthDate> <location> <birthTime> [outputPath] [outputStorage]
 
 Where <source> can be either:
   - A local file path (e.g., "./content/report.md")

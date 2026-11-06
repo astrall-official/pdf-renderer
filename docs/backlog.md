@@ -7,8 +7,10 @@ saca de aquí y va a `docs/archive/backlog/AAAA-MM-DD-HHMM-<tema>.md` (ver `docs
 ## 1. Seguridad (antes que lo demás)
 
 - **El repo es público** y su historial trae un reporte real y nombres, fechas y lugares de nacimiento
-  de clientas. Para pasarlo a privado, primero hay que servir en local la rueda de la portada, que hoy
-  se carga desde `raw.githubusercontent.com` y daría 404. Limpiar el historial lo decide el fundador.
+  de clientas. El fundador pidió dejarlo privado (5-nov-2026). La rueda de la portada ya sale de
+  `public/img/`, pero producción sigue pidiéndola a GitHub hasta el próximo `make deploy`. Orden:
+  desplegar, comprobar un PDF y recién entonces pasar a privado. El fixture
+  (`src/data/exampleMarkdown.js`) conserva las posiciones y el texto de esa lectura real, sin nombre.
 - **565 PDFs de clientas en `public/exports/`** (184 MB, de marzo a mayo de 2025, con nombre y apellido
   en el archivo). Están solo en disco, fuera de git. Hasta `609f419`, cada `make deploy` desde este Mac
   los metía en la imagen, y Next los serviría en `/exports/<archivo>.pdf`. Falta revisar si la imagen

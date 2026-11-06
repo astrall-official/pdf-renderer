@@ -41,6 +41,13 @@ const getPublicFontsPath = () => {
 
 const fontsPath = getPublicFontsPath();
 
+// Rueda de la portada. Se sirve desde public/ (está en la imagen Docker), no desde GitHub:
+// con el repo privado esa URL da 404 y la portada de cada PDF vendido sale sin rueda.
+export const coverWheelSrc =
+  typeof window !== "undefined"
+    ? "/img/astrology-wheel.jpg"
+    : path.join(process.cwd(), "public", "img", "astrology-wheel.jpg");
+
 Font.registerHyphenationCallback(word => {
   // Return entire word as unique part
   return [word];

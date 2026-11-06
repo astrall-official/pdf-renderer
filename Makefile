@@ -1,16 +1,6 @@
-.PHONY: help build start dev generate-example-pdf generate-gcp-pdf
+.PHONY: help build start dev tag push docker-build deploy clean
 
 # Variables
-EXAMPLE_FILE = ./examples/example-report.md
-OUTPUT_DIR = ./public/exports
-OUTPUT_FILE = $(OUTPUT_DIR)/example-report.pdf
-GCP_BUCKET_NAME ?= astrall-reports
-GCP_DOC_TYPE ?= report
-GCP_AREA ?= general
-GCP_NAME ?= "tomas_ejemplo"
-GCP_FORMAT ?= "full"
-GCP_INPUT_PATH ?= reports/$(GCP_DOC_TYPE)/$(GCP_AREA)/$(GCP_NAME)_$(GCP_FORMAT).txt
-GCP_OUTPUT_PATH ?= pdf/$(GCP_DOC_TYPE)/$(GCP_AREA)/$(GCP_NAME)_$(GCP_FORMAT).pdf
 
 # Google Artifact Registry Configuration - PLEASE FILL THESE IN!
 GAR_LOCATION   ?= us-central1
@@ -27,9 +17,6 @@ help:
 	@echo "  make build                   - Build the Next.js application (npm run build)"
 	@echo "  make start                   - Start the Next.js application (npm start)"
 	@echo "  make dev                     - Start the Next.js application in development mode (npm run dev)"
-	@echo "  make generate-example-pdf    - Generate an example PDF from local markdown file"
-	@echo "  make generate-gcp-pdf        - Generate a PDF from a file stored in GCP"
-	@echo "                                 Usage: make generate-gcp-pdf GCP_BUCKET_NAME=bucket GCP_DOC_TYPE=type ..."
 	@echo "  make tag                     - Tag the locally built Docker image for GAR (for manual push)."
 	@echo "  make push                    - Push the locally built and tagged Docker image to GAR."
 	@echo "  make deploy                  - Build and push a image to GAR."
@@ -41,7 +28,6 @@ help:
 	@echo "  GAR_REPOSITORY : $(GAR_REPOSITORY)"
 	@echo "  IMAGE_NAME     : $(IMAGE_NAME)"
 	@echo "  IMAGE_TAG      : $(IMAGE_TAG)"
-	@echo "Output: $(GCP_BUCKET_NAME):$(GCP_OUTPUT_PATH)"
 
 build:
 	npm run build

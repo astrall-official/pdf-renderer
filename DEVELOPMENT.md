@@ -98,8 +98,8 @@ que se acepta se valida con `product-workflow` corriendo contra este servidor lo
   con `node --test`.
 - **PDFs de clientas dentro de la imagen Docker** → el patrón `exports` de `.dockerignore` solo calzaba
   en la raíz → arreglado en `609f419`: excluye `public/exports` y `shared`.
-- **La portada carga la rueda desde `raw.githubusercontent.com`** (`MarkdownReportPDF.tsx`) → si el repo
-  pasa a privado o se mueve el archivo, la portada de cada PDF vendido se rompe → servirla en local
-  (backlog). El test usa el archivo local.
+- **La portada cargaba la rueda desde `raw.githubusercontent.com`** → con el repo privado daría 404 en
+  cada PDF vendido → ahora sale de `public/img/astrology-wheel.jpg` (`coverWheelSrc` en
+  `pdfThemes.js`). El test visual no permite red.
 - **La página 2 sale en blanco** → es el diseño actual y quedó así en la base.
 - **React avisa `Invalid '\n' string child outside <Text>`** en cada render → ya pasaba y no se ve.

@@ -39,21 +39,10 @@ const PIXEL_THRESHOLD = 0.1;
 // Fracción máxima de pixeles distintos por página para considerarla igual.
 const MAX_DIFF_RATIO = 0.001;
 
-// La portada pide la rueda astrológica por URL a GitHub. En el test se sirve el archivo local
-// (es el mismo: mismo sha1), para no depender de la red.
-const COVER_IMAGE_URL =
-  "https://raw.githubusercontent.com/astrall-official/pdf-renderer/refs/heads/main/src/assets/img/astrology-wheel.jpg";
-const COVER_IMAGE_FILE = path.join(ROOT, "src", "assets", "img", "astrology-wheel.jpg");
-
 const realFetch = globalThis.fetch;
-globalThis.fetch = (async (input: any, init?: any) => {
+// El render no debe depender de la red: la rueda de la portada se lee de public/img.
+globalThis.fetch = (async (input: any) => {
   const url = typeof input === "string" ? input : input?.url ?? String(input);
-  if (url === COVER_IMAGE_URL) {
-    return new Response(fs.readFileSync(COVER_IMAGE_FILE), {
-      status: 200,
-      headers: { "content-type": "image/jpeg" },
-    });
-  }
   throw new Error(`El test golden no permite red: ${url}`);
 }) as typeof fetch;
 
