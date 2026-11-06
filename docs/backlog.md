@@ -11,10 +11,11 @@ saca de aquí y va a `docs/archive/backlog/AAAA-MM-DD-HHMM-<tema>.md` (ver `docs
   `public/img/`, pero producción sigue pidiéndola a GitHub hasta el próximo `make deploy`. Orden:
   desplegar, comprobar un PDF y recién entonces pasar a privado. El fixture
   (`src/data/exampleMarkdown.js`) conserva las posiciones y el texto de esa lectura real, sin nombre.
-- **565 PDFs de clientas en `public/exports/`** (184 MB, de marzo a mayo de 2025, con nombre y apellido
-  en el archivo). Están solo en disco, fuera de git. Hasta `609f419`, cada `make deploy` desde este Mac
-  los metía en la imagen, y Next los serviría en `/exports/<archivo>.pdf`. Falta revisar si la imagen
-  `:latest` de GAR los trae, y borrarlos del disco con OK del fundador.
+- **La imagen de producción trae 565 PDFs de clientas** (comprobado el 5-nov-2026 leyendo las capas en
+  GAR). `:latest`, que también tiene el tag `:staging`, del 14-feb-2026, lleva `public/exports/` con
+  PDFs vendidos de marzo a mayo de 2025, con nombre y apellido en el archivo. Next los sirve en
+  `/exports/<archivo>.pdf`. Ya no están en el disco ni entran en una imagen nueva (`609f419`). Se
+  cierra con el próximo `make deploy` y borrando de GAR las imágenes viejas, que también los traen.
 - **Confirmar si el renderer de producción se ve desde internet.** `product-workflow/docker-compose.yml`
   publica el 3001 en un puerto aleatorio del host. `/api/export-pdf` acepta `sourceFilePath` y
   `outputPath` libres: lee y escribe cualquier ruta del contenedor, incluida la credencial de GCS
